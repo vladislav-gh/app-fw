@@ -8,6 +8,8 @@ import { Providers } from "@App/providers";
 
 import "@App/styles";
 
+import { WPNotificationsInstallPrompt, WPNotificationsManager } from "@Features/wp-notifications";
+
 const fontPrimary = Nunito({
 	subsets: ["latin"],
 	variable: "--font-primary",
@@ -36,7 +38,12 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 					"lg:text-body",
 				)}
 			>
-				<Providers locale={locale as Locale}>{children}</Providers>
+				<Providers locale={locale as Locale}>
+					{children}
+
+					<WPNotificationsManager />
+					<WPNotificationsInstallPrompt />
+				</Providers>
 			</body>
 		</html>
 	);

@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --webpack",
+		"dev": "next dev --webpack --experimental-https",
 		"build": "next build --webpack",
 		"start": "next start --webpack",
 		"lint": "biome check",
@@ -20,7 +20,8 @@
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
 		"react-use": "^17.6.0",
-		"tailwind-merge": "^3.4.0"
+		"tailwind-merge": "^3.4.0",
+		"web-push": "^3.6.7"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.11",
@@ -29,6 +30,7 @@
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"@types/web-push": "^3.6.4",
 		"babel-plugin-react-compiler": "1.0.0",
 		"tailwindcss": "^4",
 		"typescript": "^5"
