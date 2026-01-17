@@ -34,7 +34,7 @@ export async function generateMetadata() {
 		},
 		manifest: "/site.webmanifest",
 		other: {
-			"apple-mobile-web-app-title": "vDev",
+			"apple-mobile-web-app-title": "FW Tracker",
 		},
 		title: t("metadata.title"),
 		description: "",
@@ -42,7 +42,7 @@ export async function generateMetadata() {
 }
 
 export const viewport: Viewport = {
-	themeColor: "#0b0e0b",
+	themeColor: "#222222",
 };
 
 export function generateStaticParams() {
