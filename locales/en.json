@@ -1,0 +1,21 @@
+{
+	"metadata": {
+		"title": "Fitness Workout Tracker"
+	},
+	"theme": {
+		"dark": "Dark theme",
+		"light": "Light theme",
+		"system": "System theme"
+	},
+	"pageHome": {
+		"title": "Home page"
+	},
+	"pageNotFound": {
+		"buttons": {
+			"home": "Go Home"
+		},
+		"subtitle": "Oops! This Page is Not Found.",
+		"text": "The requested page dose not exist",
+		"title": "404"
+	}
+}

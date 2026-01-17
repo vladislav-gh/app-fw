@@ -1,0 +1,84 @@
+@layer base {
+	*,
+	*::before,
+	*::after {
+		outline: none;
+	}
+
+	html {
+		&.is-scroll-locked {
+			overflow: clip;
+		}
+	}
+
+	body {
+		text-decoration-skip: objects;
+		text-rendering: optimizeLegibility;
+		text-size-adjust: 100%;
+		-webkit-tap-highlight-color: transparent;
+
+		.is-scroll-locked & {
+			pointer-events: none;
+		}
+
+		.is-scroll-locked:not(.no-scrollbar) & {
+			padding-right: var(--scrollbar-width, 0);
+
+			&::before {
+				display: block;
+				z-index: 1001;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow-y: scroll;
+				content: "";
+				pointer-events: none;
+			}
+		}
+	}
+
+	main {
+		flex: 1;
+	}
+
+	a {
+		text-decoration: none;
+		text-decoration-skip-ink: none;
+	}
+
+	img,
+	svg {
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+@layer utilities {
+	.scroll-container-x {
+		-webkit-overflow-scrolling: touch;
+		overflow: hidden;
+		overflow-x: auto;
+	}
+
+	.scroll-container-y {
+		-webkit-overflow-scrolling: touch;
+		overflow: hidden;
+		overflow-y: auto;
+	}
+
+	.hide-scrollbar {
+		@supports not selector(::-webkit-scrollbar) {
+			scrollbar-width: 0;
+		}
+
+		&::-webkit-scrollbar {
+			display: none;
+			width: 0;
+			height: 0;
+		}
+	}
+}

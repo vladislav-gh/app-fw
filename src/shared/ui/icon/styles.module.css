@@ -1,0 +1,6 @@
+.component {
+	path,
+	circle {
+		vector-effect: non-scaling-stroke;
+	}
+}

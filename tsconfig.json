@@ -1,34 +1,41 @@
 {
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
-  ],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"target": "ES2017",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"paths": {
+			"@Shared": ["./src/shared"],
+			"@Shared/*": ["./src/shared/*"],
+			"@Entities": ["./src/entities"],
+			"@Entities/*": ["./src/entities/*"],
+			"@Features": ["./src/features"],
+			"@Features/*": ["./src/features/*"],
+			"@Widgets": ["./src/widgets"],
+			"@Widgets/*": ["./src/widgets/*"],
+			"@Pages": ["./src/pages"],
+			"@Pages/*": ["./src/pages/*"],
+			"@App": ["./src/app"],
+			"@App/*": ["./src/app/*"],
+			"@Src/*": ["./src/*"],
+			"@Locales/*": ["./locales/*"],
+			"@/*": ["./*"]
+		}
+	},
+	"include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts", "**/*.mts"],
+	"exclude": ["node_modules"]
 }
