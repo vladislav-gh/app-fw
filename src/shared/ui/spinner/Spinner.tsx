@@ -1,11 +1,10 @@
 import type { ElProps } from "@Shared/types";
-import type { FC } from "react";
 
 import { twcx } from "@Shared/utils";
 
 export type SpinnerProps = ElProps<"svg">;
 
-export const Spinner: FC<SpinnerProps> = ({ className, ...restProps }) => {
+export function Spinner({ className, ...restProps }: SpinnerProps) {
 	return (
 		<svg
 			className={twcx("size-6 animate-spin fill-white/15 text-white", className)}
@@ -25,4 +24,4 @@ export const Spinner: FC<SpinnerProps> = ({ className, ...restProps }) => {
 			/>
 		</svg>
 	);
-};
+}

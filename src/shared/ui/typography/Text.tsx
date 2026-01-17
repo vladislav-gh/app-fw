@@ -1,6 +1,5 @@
 import type { ElProps } from "@Shared/types";
 import type { VariantProps } from "class-variance-authority";
-import type { FC } from "react";
 
 import { cva } from "class-variance-authority";
 
@@ -68,7 +67,7 @@ export type TextProps = ElProps<"div", keyof TextVariants> &
 		as?: "div" | "span" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 	};
 
-export const Text: FC<TextProps> = ({
+export function Text({
 	ref,
 	className,
 	as = "div",
@@ -80,7 +79,7 @@ export const Text: FC<TextProps> = ({
 	align,
 	color,
 	...restProps
-}) => {
+}: TextProps) {
 	const Component = as;
 
 	return (
@@ -90,4 +89,4 @@ export const Text: FC<TextProps> = ({
 			{...restProps}
 		/>
 	);
-};
+}

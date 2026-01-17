@@ -1,7 +1,6 @@
 "use client";
 
 import type { ImageProps as NextImageProps } from "next/image";
-import type { FC } from "react";
 import type { ImageProps } from "./Image";
 
 import NextImage from "next/image";
@@ -11,7 +10,7 @@ import { Spinner } from "@Shared/ui";
 
 export type ImageWithLoaderProps = Pick<ImageProps, "classNames"> & NextImageProps;
 
-export const ImageWithLoader: FC<ImageWithLoaderProps> = ({ classNames, src, ...restProps }) => {
+export function ImageWithLoader({ classNames, src, ...restProps }: ImageWithLoaderProps) {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const memoImage = useMemo(
@@ -54,4 +53,4 @@ export const ImageWithLoader: FC<ImageWithLoaderProps> = ({ classNames, src, ...
 			{memoImage}
 		</div>
 	);
-};
+}

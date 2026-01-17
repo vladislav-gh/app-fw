@@ -1,19 +1,18 @@
 import type { Locale } from "next-intl";
-import type { FC } from "react";
 
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 
-export type PageProps = {
+export interface PageProps {
 	params: Promise<{ locale: Locale }>;
-};
+}
 
-export const Page: FC<PageProps> = ({ params }) => {
+export function Page({ params }: PageProps) {
 	const { locale } = use(params);
 	const t = useTranslations("pageHome");
 
 	setRequestLocale(locale);
 
 	return <main>{t("title")}</main>;
-};
+}

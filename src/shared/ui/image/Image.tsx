@@ -1,5 +1,5 @@
 import type { ImageProps as NextImageProps } from "next/image";
-import type { FC, RefObject } from "react";
+import type { RefObject } from "react";
 
 import NextImage from "next/image";
 
@@ -9,14 +9,14 @@ import { twcx } from "@Shared/utils";
 
 import { ImageWithLoader } from "./WithLoader";
 
-type ImagePropsClassNames = {
+interface ImagePropsClassNames {
 	wrapper?: string;
 	loader?: string;
 	spinner?: string;
 	icon?: string;
-};
+}
 
-type ImagePropsSizes = {
+interface ImagePropsSizes {
 	default?: string;
 	xs?: string;
 	sm?: string;
@@ -25,27 +25,18 @@ type ImagePropsSizes = {
 	xl?: string;
 	"2xl"?: string;
 	"3xl"?: string;
-};
+}
 
-export type ImageProps = Omit<NextImageProps, "src" | "alt" | "sizes"> & {
+export interface ImageProps extends Omit<NextImageProps, "src" | "alt" | "sizes"> {
 	ref?: RefObject<HTMLImageElement>;
 	classNames?: ImagePropsClassNames;
 	src?: NextImageProps["src"] | null;
 	alt?: string;
 	sizes?: ImagePropsSizes;
 	withLoader?: boolean;
-};
+}
 
-export const Image: FC<ImageProps> = ({
-	ref,
-	className,
-	classNames,
-	src,
-	alt = "",
-	sizes,
-	withLoader,
-	...restProps
-}) => {
+export function Image({ ref, className, classNames, src, alt = "", sizes, withLoader, ...restProps }: ImageProps) {
 	const getSizes = () => {
 		const sizesArr = [];
 
@@ -124,4 +115,4 @@ export const Image: FC<ImageProps> = ({
 	) : (
 		<NextImage className={className} {...imageProps} />
 	);
-};
+}

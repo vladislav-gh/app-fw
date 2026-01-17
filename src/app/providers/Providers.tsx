@@ -1,12 +1,12 @@
 import type { Locale } from "@Shared/i18n";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import { ProviderNextIntl } from "./NextIntl";
 
-export type ProvidersProps = PropsWithChildren & {
+export interface ProvidersProps extends PropsWithChildren {
 	locale: Locale;
-};
+}
 
-export const Providers: FC<ProvidersProps> = ({ locale, children }) => {
+export function Providers({ locale, children }: ProvidersProps) {
 	return <ProviderNextIntl locale={locale}>{children}</ProviderNextIntl>;
-};
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ElProps } from "@Shared/types";
-import type { ComponentPropsWithRef, FC, ReactNode } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 
 import { useState } from "react";
 import { useUpdateEffect } from "react-use";
@@ -54,13 +54,13 @@ const buttonVariants = cva(
 
 const button = (variants: ButtonVariants) => buttonVariants(variants);
 
-type ButtonPropsClassNames = {
+interface ButtonPropsClassNames {
 	spinner?: string;
 	textIconContainer?: string;
 	textIconIcon?: string;
 	textIconWrapper?: string;
 	textIconText?: string;
-};
+}
 
 export type ButtonProps = ElProps<"button", keyof ButtonVariants & LinkProps> &
 	ComponentPropsWithRef<"button"> &
@@ -71,7 +71,7 @@ export type ButtonProps = ElProps<"button", keyof ButtonVariants & LinkProps> &
 		loadingContent?: ReactNode;
 	};
 
-export const Button: FC<ButtonProps> = ({
+export function Button({
 	ref,
 	className,
 	classNames,
@@ -84,7 +84,7 @@ export const Button: FC<ButtonProps> = ({
 	disabled,
 	children,
 	...restProps
-}) => {
+}: ButtonProps) {
 	const [isDisabled, setIsDisabled] = useState<boolean>(!!disabled);
 
 	const propDisabled = enableDelay ? isDisabled : disabled;
@@ -131,4 +131,4 @@ export const Button: FC<ButtonProps> = ({
 			{content}
 		</button>
 	);
-};
+}

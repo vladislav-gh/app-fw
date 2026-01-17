@@ -1,6 +1,5 @@
 import type { ElProps } from "@Shared/types";
 import type { VariantProps } from "class-variance-authority";
-import type { FC } from "react";
 import type { IconsKeys } from "./collection";
 
 import { cva } from "class-variance-authority";
@@ -15,9 +14,9 @@ type IconVariantsProps = VariantProps<typeof iconVariants>;
 const iconVariants = cva([styles.component, "block size-[1em] max-w-none shrink-0 text-[1em] leading-none"], {
 	variants: {
 		size: {
-			sm: "text-[24px]",
-			md: "text-[32px]",
-			lg: "text-[48px]",
+			sm: "text-[1.25rem]",
+			md: "text-[1.5rem]",
+			lg: "text-[1.75rem]",
 		},
 	},
 	defaultVariants: {
@@ -32,7 +31,7 @@ export type IconProps = ElProps<"svg", keyof IconVariantsProps> &
 		k: IconsKeys;
 	};
 
-export const Icon: FC<IconProps> = ({ className, k, ...restProps }) => {
+export function Icon({ className, k, ...restProps }: IconProps) {
 	const Component = IconsCollection[k];
 
 	if (!Component) {
@@ -40,4 +39,4 @@ export const Icon: FC<IconProps> = ({ className, k, ...restProps }) => {
 	}
 
 	return <Component className={twcx(icon(restProps), className)} {...restProps} />;
-};
+}

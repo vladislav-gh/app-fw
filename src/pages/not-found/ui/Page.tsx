@@ -4,7 +4,7 @@ import { PAGES } from "@Shared/config";
 import { Link, Text } from "@Shared/ui";
 import { twcx } from "@Shared/utils";
 
-export const Page = () => {
+export function Page() {
 	const t = useTranslations("pageNotFound");
 
 	return (
@@ -37,4 +37,4 @@ export const Page = () => {
 			</Link>
 		</main>
 	);
-};
+}

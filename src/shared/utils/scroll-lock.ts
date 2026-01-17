@@ -4,7 +4,7 @@ const SCROLL_LOCK_CLASSNAME = "is-scroll-locked";
 
 let dataScrollLocks: Set<string> | undefined;
 
-export const scrollLock = (state: boolean, name: string) => {
+export function scrollLock(state: boolean, name: string) {
 	if (IS_SERVER) {
 		return;
 	}
@@ -24,4 +24,4 @@ export const scrollLock = (state: boolean, name: string) => {
 			document.documentElement.classList.remove(SCROLL_LOCK_CLASSNAME);
 		}
 	}
-};
+}

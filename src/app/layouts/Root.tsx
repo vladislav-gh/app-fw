@@ -1,5 +1,5 @@
 import type { Locale } from "@Shared/i18n";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import { Nunito } from "next/font/google";
 
@@ -16,11 +16,11 @@ const fontPrimary = Nunito({
 	style: ["normal"],
 });
 
-export type LayoutRootProps = PropsWithChildren & {
+export interface LayoutRootProps extends PropsWithChildren {
 	params: Promise<{ locale: string }>;
-};
+}
 
-export const LayoutRoot: FC<LayoutRootProps> = async ({ params, children }) => {
+export async function LayoutRoot({ params, children }: LayoutRootProps) {
 	const { locale } = await params;
 
 	return (
@@ -40,4 +40,4 @@ export const LayoutRoot: FC<LayoutRootProps> = async ({ params, children }) => {
 			</body>
 		</html>
 	);
-};
+}

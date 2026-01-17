@@ -3,7 +3,7 @@ import { useWindowSize } from "react-use";
 
 import { BREAKPOINTS, IS_CLIENT } from "@Shared/config";
 
-type CurrentScreensStateModel = {
+interface CurrentScreensStateModel {
 	isXs: boolean;
 	isSm: boolean;
 	isMd: boolean;
@@ -11,7 +11,7 @@ type CurrentScreensStateModel = {
 	isXl: boolean;
 	is2xl: boolean;
 	is3xl: boolean;
-};
+}
 
 const getCurrentScreensState = (): CurrentScreensStateModel => ({
 	isXs: IS_CLIENT && innerWidth >= BREAKPOINTS.xs,
@@ -23,10 +23,10 @@ const getCurrentScreensState = (): CurrentScreensStateModel => ({
 	is3xl: IS_CLIENT && innerWidth >= BREAKPOINTS["3xl"],
 });
 
-export const useScreens = () => {
+export function useScreens() {
 	const { width } = useWindowSize();
 
 	const screens = useMemo(() => getCurrentScreensState(), [width]);
 
 	return screens;
-};
+}

@@ -1,5 +1,5 @@
 import type { ElProps } from "@Shared/types";
-import type { ComponentProps, FC } from "react";
+import type { ComponentProps } from "react";
 
 import { Link as NextLink } from "@Shared/i18n";
 import { twcx } from "@Shared/utils";
@@ -12,7 +12,7 @@ export type LinkProps = ElProps<"a"> &
 		email?: string;
 	};
 
-export const Link: FC<LinkProps> = ({ className, href, simple, email, children, ...restProps }) => {
+export function Link({ className, href, simple, email, children, ...restProps }: LinkProps) {
 	let to = href;
 	let content = children;
 
@@ -37,4 +37,4 @@ export const Link: FC<LinkProps> = ({ className, href, simple, email, children, 
 	}
 
 	return <NextLink {...commonLinkProps}>{content}</NextLink>;
-};
+}
