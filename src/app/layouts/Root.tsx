@@ -4,7 +4,6 @@ import type { PropsWithChildren } from "react";
 import { Nunito } from "next/font/google";
 
 import { twcx } from "@Shared/utils";
-import { WPNotificationsInstallPrompt, WPNotificationsManager } from "@Features/wp-notifications";
 import { Providers } from "@App/providers";
 
 import "@App/styles";
@@ -38,12 +37,7 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 					"lg:text-body",
 				)}
 			>
-				<Providers locale={locale as Locale}>
-					{children}
-
-					<WPNotificationsManager />
-					<WPNotificationsInstallPrompt />
-				</Providers>
+				<Providers locale={locale as Locale}>{children}</Providers>
 			</body>
 		</html>
 	);
