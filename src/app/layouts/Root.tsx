@@ -4,11 +4,10 @@ import type { PropsWithChildren } from "react";
 import { Nunito } from "next/font/google";
 
 import { twcx } from "@Shared/utils";
+import { WPNotificationsInstallPrompt, WPNotificationsManager } from "@Features/wp-notifications";
 import { Providers } from "@App/providers";
 
 import "@App/styles";
-
-import { WPNotificationsInstallPrompt, WPNotificationsManager } from "@Features/wp-notifications";
 
 const fontPrimary = Nunito({
 	subsets: ["latin"],
@@ -29,6 +28,7 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 		<html
 			className={twcx("box-border w-full overflow-x-clip overscroll-none", fontPrimary.variable)}
 			lang={locale}
+			dir="ltr"
 			suppressHydrationWarning
 		>
 			<body

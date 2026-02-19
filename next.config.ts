@@ -1,9 +1,22 @@
 import type { NextConfig } from "next";
 import type { RemotePattern } from "next/dist/shared/lib/image-config";
 
+import { spawnSync } from "node:child_process";
+
 import createNextIntlPlugin from "next-intl/plugin";
+import withSerwistInit from "@serwist/next";
 
 const withNextIntl = createNextIntlPlugin("./src/shared/i18n/request.ts");
+
+const revision = spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" }).stdout ?? crypto.randomUUID();
+
+const withSerwist = withSerwistInit({
+	additionalPrecacheEntries: [{ url: "/~offline", revision }],
+	swSrc: "app/sw.ts",
+	swDest: "public/sw.js",
+	reloadOnOnline: false,
+	disable: process.env.NODE_ENV === "development",
+});
 
 const imagesRemotePatterns: RemotePattern[] = [
 	{
@@ -105,4 +118,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-export default withNextIntl(nextConfig);
+export default withSerwist(withNextIntl(nextConfig));
