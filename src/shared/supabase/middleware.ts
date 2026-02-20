@@ -1,3 +1,5 @@
+import type { Database } from "./types";
+
 import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
@@ -12,16 +14,18 @@ export const createClientMiddleware = (request: NextRequest) => {
 	});
 
 	// biome-ignore lint/correctness/noUnusedVariables: false
-	const supabase = createServerClient(SUPABASE_URL, SUPABASE_KEY, {
+	const supabase = createServerClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
 		cookies: {
 			getAll() {
 				return request.cookies.getAll();
 			},
 			setAll(cookiesToSet) {
 				cookiesToSet.forEach(({ name, value }) => void request.cookies.set(name, value));
+
 				supabaseResponse = NextResponse.next({
 					request,
 				});
+
 				cookiesToSet.forEach(({ name, value, options }) => void supabaseResponse.cookies.set(name, value, options));
 			},
 		},
