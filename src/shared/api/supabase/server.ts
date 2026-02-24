@@ -5,7 +5,7 @@ import { createServerClient } from "@supabase/ssr";
 
 import { SUPABASE_KEY, SUPABASE_URL } from "./config";
 
-export const createClientServer = async () => {
+export async function createClientServer() {
 	const cookieStore = await cookies();
 
 	return createServerClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
@@ -24,4 +24,4 @@ export const createClientServer = async () => {
 			},
 		},
 	});
-};
+}

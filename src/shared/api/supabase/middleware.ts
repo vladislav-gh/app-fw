@@ -1,19 +1,11 @@
+import type { NextRequest, NextResponse } from "next/server";
 import type { Database } from "./types";
 
-import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
 import { SUPABASE_KEY, SUPABASE_URL } from "./config";
 
-export const createClientMiddleware = (request: NextRequest) => {
-	// Create an unmodified response
-	let supabaseResponse = NextResponse.next({
-		request: {
-			headers: request.headers,
-		},
-	});
-
-	// biome-ignore lint/correctness/noUnusedVariables: false
+export async function updateSession(request: NextRequest, response: NextResponse) {
 	const supabase = createServerClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
 		cookies: {
 			getAll() {
@@ -21,15 +13,19 @@ export const createClientMiddleware = (request: NextRequest) => {
 			},
 			setAll(cookiesToSet) {
 				cookiesToSet.forEach(({ name, value }) => void request.cookies.set(name, value));
-
-				supabaseResponse = NextResponse.next({
-					request,
-				});
-
-				cookiesToSet.forEach(({ name, value, options }) => void supabaseResponse.cookies.set(name, value, options));
+				cookiesToSet.forEach(({ name, value, options }) => void response.cookies.set(name, value, options));
 			},
 		},
 	});
 
-	return supabaseResponse;
-};
+	const { data } = await supabase.auth.getClaims();
+	const user = data?.claims;
+
+	if (!user && !request.nextUrl.pathname.startsWith("/login") && !request.nextUrl.pathname.startsWith("/auth")) {
+		// 	const url = request.nextUrl.clone();
+		// 	url.pathname = "/login";
+		// 	return NextResponse.redirect(url);
+	}
+
+	return response;
+}

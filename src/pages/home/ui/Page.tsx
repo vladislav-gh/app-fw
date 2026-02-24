@@ -1,18 +1,29 @@
 import type { Locale } from "next-intl";
 
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
-import { use } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+
+import { getUser } from "@Entities/user";
+import { ButtonSignOut, FormForgotPassword, FormSignIn, FormSignUp } from "@Features/auth/ui";
 
 export interface PageProps {
 	params: Promise<{ locale: Locale }>;
 }
 
-export function Page({ params }: PageProps) {
-	const { locale } = use(params);
-	const t = useTranslations("pageHome");
+export async function Page({ params }: PageProps) {
+	const { locale } = await params;
+	const t = await getTranslations("pageHome");
 
 	setRequestLocale(locale);
 
-	return <main>{t("title")}</main>;
+	const user = await getUser();
+
+	return (
+		<main className="flex flex-col gap-25">
+			{t("title")}
+			{!user && <FormSignUp />}
+			{!user && <FormSignIn />}
+			{!user && <FormForgotPassword />}
+			{user && <ButtonSignOut />}
+		</main>
+	);
 }
