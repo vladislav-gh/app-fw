@@ -6,6 +6,7 @@ import { Nunito } from "next/font/google";
 import { twcx } from "@Shared/utils";
 import { Header } from "@Widgets/header";
 import { Providers } from "@App/providers";
+
 import "@App/styles";
 
 const fontPrimary = Nunito({
