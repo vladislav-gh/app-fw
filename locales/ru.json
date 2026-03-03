@@ -7,9 +7,6 @@
 		"light": "Светлая тема",
 		"system": "Системная тема"
 	},
-	"pageHome": {
-		"title": "Домашняя страница"
-	},
 	"pageNotFound": {
 		"buttons": {
 			"home": "Вернуться на главную"
@@ -17,5 +14,20 @@
 		"subtitle": "Упс! Эта страница не найдена.",
 		"text": "Запрашиваемая страница не существует",
 		"title": "404"
+	},
+	"pageHome": {
+		"title": "Главная"
+	},
+	"pageSignUp": {
+		"title": "Регистрация"
+	},
+	"pageSignIn": {
+		"title": "Вход"
+	},
+	"pageForgotPassword": {
+		"title": "Забыли пароль?"
+	},
+	"pageProfile": {
+		"title": "Профиль"
 	}
 }

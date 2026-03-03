@@ -2,15 +2,22 @@ import type { Locale } from "next-intl";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { FormSignUp } from "@Features/auth";
+
 export interface PageProps {
 	params: Promise<{ locale: Locale }>;
 }
 
 export async function Page({ params }: PageProps) {
 	const { locale } = await params;
-	const t = await getTranslations("pageHome");
+	const t = await getTranslations("pageSignUp");
 
 	setRequestLocale(locale);
 
-	return <main className="flex flex-col gap-25">{t("title")}</main>;
+	return (
+		<main className="flex flex-col gap-25">
+			{t("title")}
+			<FormSignUp />
+		</main>
+	);
 }

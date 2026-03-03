@@ -2,15 +2,23 @@ import type { Locale } from "next-intl";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { getUser } from "@Entities/user";
+
 export interface PageProps {
 	params: Promise<{ locale: Locale }>;
 }
 
 export async function Page({ params }: PageProps) {
 	const { locale } = await params;
-	const t = await getTranslations("pageHome");
+	const t = await getTranslations("pageProfile");
+	const user = await getUser();
 
 	setRequestLocale(locale);
 
-	return <main className="flex flex-col gap-25">{t("title")}</main>;
+	return (
+		<main className="flex flex-col gap-25">
+			{t("title")}
+			{user?.name}
+		</main>
+	);
 }

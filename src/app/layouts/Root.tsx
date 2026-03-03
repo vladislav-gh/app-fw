@@ -4,8 +4,8 @@ import type { PropsWithChildren } from "react";
 import { Nunito } from "next/font/google";
 
 import { twcx } from "@Shared/utils";
+import { Header } from "@Widgets/header";
 import { Providers } from "@App/providers";
-
 import "@App/styles";
 
 const fontPrimary = Nunito({
@@ -37,7 +37,10 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 					"lg:text-body",
 				)}
 			>
-				<Providers locale={locale as Locale}>{children}</Providers>
+				<Providers locale={locale as Locale}>
+					<Header />
+					{children}
+				</Providers>
 			</body>
 		</html>
 	);

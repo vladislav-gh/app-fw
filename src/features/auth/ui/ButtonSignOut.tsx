@@ -1,11 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 import { signOut } from "../actions";
 
 export function ButtonSignOut() {
-	const [_state, dispatchAction] = useActionState(signOut, null);
+	const [state, dispatchAction] = useActionState(signOut, null);
+
+	useEffect(() => {
+		console.log("sign out state:", state);
+	}, [state]);
 
 	return (
 		<form action={dispatchAction}>

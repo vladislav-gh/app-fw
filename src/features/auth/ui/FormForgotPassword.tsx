@@ -1,11 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 import { forgotPassword } from "../actions";
 
 export function FormForgotPassword() {
-	const [_state, dispatchAction] = useActionState(forgotPassword, null);
+	const [state, dispatchAction] = useActionState(forgotPassword, null);
+
+	useEffect(() => {
+		console.log("forgot password state:", state);
+	}, [state]);
 
 	return (
 		<form className="flex flex-col gap-4" action={dispatchAction}>

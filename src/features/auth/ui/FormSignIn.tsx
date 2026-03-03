@@ -1,11 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 import { signIn } from "../actions";
 
 export function FormSignIn() {
-	const [_state, dispatchAction] = useActionState(signIn, null);
+	const [state, dispatchAction] = useActionState(signIn, null);
+
+	useEffect(() => {
+		console.log("sign in state:", state);
+	}, [state]);
 
 	return (
 		<form className="flex flex-col gap-4" action={dispatchAction}>
