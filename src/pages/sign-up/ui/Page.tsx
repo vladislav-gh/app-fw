@@ -10,9 +10,10 @@ export interface PageProps {
 
 export async function Page({ params }: PageProps) {
 	const { locale } = await params;
-	const t = await getTranslations("pageSignUp");
 
 	setRequestLocale(locale);
+
+	const t = await getTranslations("pageSignUp");
 
 	return (
 		<main className="flex flex-col gap-25">

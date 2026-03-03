@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { routing } from "@Shared/i18n";
 
 export async function generateMetadata() {
-	const t = await getTranslations();
+	const t = await getTranslations("metadata");
 
 	return {
 		metadataBase: process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined,
@@ -36,7 +36,7 @@ export async function generateMetadata() {
 		other: {
 			"apple-mobile-web-app-title": "FW Tracker",
 		},
-		title: t("metadata.title"),
+		title: t("title"),
 		description: "",
 	};
 }
