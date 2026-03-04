@@ -1,10 +1,17 @@
 "use client";
 
+import type { ElProps } from "@Shared/types";
+
 import { useActionState, useEffect } from "react";
+
+import { Button, Input } from "@Shared/ui";
+import { cn } from "@Shared/utils";
 
 import { forgotPassword } from "../actions";
 
-export function FormForgotPassword() {
+export type FormForgotPasswordProps = ElProps<"form">;
+
+export function FormForgotPassword({ className, ...restProps }: FormForgotPasswordProps) {
 	const [state, dispatchAction] = useActionState(forgotPassword, null);
 
 	useEffect(() => {
@@ -12,9 +19,10 @@ export function FormForgotPassword() {
 	}, [state]);
 
 	return (
-		<form className="flex flex-col gap-4" action={dispatchAction}>
-			<input name="email" type="email" placeholder="Email" />
-			<button type="submit">Send</button>
+		<form className={cn("flex flex-col gap-4", className)} action={dispatchAction} {...restProps}>
+			<Input name="email" type="email" placeholder="Email" />
+
+			<Button type="submit">Send</Button>
 		</form>
 	);
 }

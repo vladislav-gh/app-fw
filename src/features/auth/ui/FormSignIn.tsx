@@ -1,10 +1,17 @@
 "use client";
 
+import type { ElProps } from "@Shared/types";
+
 import { useActionState, useEffect } from "react";
+
+import { Button, Input } from "@Shared/ui";
+import { cn } from "@Shared/utils";
 
 import { signIn } from "../actions";
 
-export function FormSignIn() {
+export type FormSingInProps = ElProps<"form">;
+
+export function FormSignIn({ className, ...restProps }: FormSingInProps) {
 	const [state, dispatchAction] = useActionState(signIn, null);
 
 	useEffect(() => {
@@ -12,10 +19,11 @@ export function FormSignIn() {
 	}, [state]);
 
 	return (
-		<form className="flex flex-col gap-4" action={dispatchAction}>
-			<input name="email" type="email" placeholder="Email" />
-			<input name="password" type="password" placeholder="Password" />
-			<button type="submit">Sign In</button>
+		<form className={cn("flex flex-col gap-4", className)} action={dispatchAction} {...restProps}>
+			<Input name="email" type="email" placeholder="Email" />
+			<Input name="password" type="password" placeholder="Password" />
+
+			<Button type="submit">Sign In</Button>
 		</form>
 	);
 }

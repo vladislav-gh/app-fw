@@ -3,6 +3,7 @@ import type { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { getUser } from "@Entities/user";
+import { ButtonSignOut } from "@Features/auth";
 
 export interface PageProps {
 	params: Promise<{ locale: Locale }>;
@@ -19,7 +20,10 @@ export async function Page({ params }: PageProps) {
 	return (
 		<main className="flex flex-col gap-25">
 			{t("title")}
+
 			{user?.name}
+
+			<ButtonSignOut />
 		</main>
 	);
 }
