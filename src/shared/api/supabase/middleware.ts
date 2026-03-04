@@ -1,9 +1,15 @@
-import type { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import type { Database } from "./types";
 
+import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
+import { PAGES } from "@Shared/config";
+
 import { SUPABASE_KEY, SUPABASE_URL } from "./config";
+
+const publicRoutes = [PAGES.signUp, PAGES.signIn, PAGES.forgotPassword];
+const privateRoutes = [PAGES.profile];
 
 export async function updateSession(request: NextRequest, response: NextResponse) {
 	const supabase = createServerClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
@@ -21,10 +27,18 @@ export async function updateSession(request: NextRequest, response: NextResponse
 	const { data } = await supabase.auth.getClaims();
 	const user = data?.claims;
 
-	if (!user && !request.nextUrl.pathname.startsWith("/login") && !request.nextUrl.pathname.startsWith("/auth")) {
-		// 	const url = request.nextUrl.clone();
-		// 	url.pathname = "/login";
-		// 	return NextResponse.redirect(url);
+	if (!user && privateRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
+		const url = request.nextUrl.clone();
+
+		url.pathname = PAGES.signIn;
+
+		return NextResponse.redirect(url);
+	} else if (user && publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
+		const url = request.nextUrl.clone();
+
+		url.pathname = PAGES.profile;
+
+		return NextResponse.redirect(url);
 	}
 
 	return response;
