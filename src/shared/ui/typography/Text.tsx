@@ -3,7 +3,7 @@ import type { VariantProps } from "class-variance-authority";
 
 import { cva } from "class-variance-authority";
 
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 
 type TextVariants = VariantProps<typeof textVariants>;
 
@@ -85,7 +85,7 @@ export function Text({
 	return (
 		<Component
 			ref={ref}
-			className={twcx(text({ variant, family, weight, uppercase, italic, align, color }), className)}
+			className={cn(text({ variant, family, weight, uppercase, italic, align, color }), className)}
 			{...restProps}
 		/>
 	);

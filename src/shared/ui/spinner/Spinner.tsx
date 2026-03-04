@@ -1,13 +1,13 @@
 import type { ElProps } from "@Shared/types";
 
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 
 export type SpinnerProps = ElProps<"svg">;
 
 export function Spinner({ className, ...restProps }: SpinnerProps) {
 	return (
 		<svg
-			className={twcx("size-6 animate-spin fill-white/15 text-white", className)}
+			className={cn("size-6 animate-spin fill-white/15 text-white", className)}
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 100 101.2"
 			fill="none"

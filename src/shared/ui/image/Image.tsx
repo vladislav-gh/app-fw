@@ -5,7 +5,7 @@ import NextImage from "next/image";
 
 import { BREAKPOINTS } from "@Shared/config";
 import { Icon } from "@Shared/ui";
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 
 import { ImageWithLoader } from "./WithLoader";
 
@@ -83,12 +83,12 @@ export function Image({ ref, className, classNames, src, alt = "", sizes, withLo
 		return (
 			<div
 				ref={ref}
-				className={twcx(
+				className={cn(
 					"bg-black-total text-white-total flex size-full items-center justify-center overflow-hidden",
 					className,
 				)}
 			>
-				<Icon className={twcx("size-3/4", classNames?.icon)} k="image" />
+				<Icon className={cn("size-3/4", classNames?.icon)} k="image" />
 			</div>
 		);
 	}
@@ -106,8 +106,8 @@ export function Image({ ref, className, classNames, src, alt = "", sizes, withLo
 		<ImageWithLoader
 			className={className}
 			classNames={{
-				wrapper: twcx("relative z-0 size-full", classNames?.wrapper),
-				loader: twcx("absolute inset-0 z-10", classNames?.loader),
+				wrapper: cn("relative z-0 size-full", classNames?.wrapper),
+				loader: cn("absolute inset-0 z-10", classNames?.loader),
 				spinner: classNames?.spinner,
 			}}
 			{...imageProps}

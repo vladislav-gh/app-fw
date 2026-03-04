@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 
 import { Nunito } from "next/font/google";
 
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 import { Header } from "@Widgets/header";
 import { Providers } from "@App/providers";
 
@@ -26,14 +26,14 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 
 	return (
 		<html
-			className={twcx("box-border w-full overflow-x-clip overscroll-none", fontPrimary.variable)}
+			className={cn("box-border w-full overflow-x-clip overscroll-none", fontPrimary.variable)}
 			lang={locale}
 			dir="ltr"
 			suppressHydrationWarning
 		>
 			<body
 				id="__next"
-				className={twcx(
+				className={cn(
 					"font-primary bg-background text-text text-body-d flex min-h-dvh w-full flex-col overflow-x-clip overscroll-none scroll-smooth antialiased",
 					"lg:text-body",
 				)}

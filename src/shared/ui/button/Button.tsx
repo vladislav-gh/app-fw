@@ -8,7 +8,7 @@ import { useUpdateEffect } from "react-use";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { Link, type LinkProps, Spinner } from "@Shared/ui";
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
@@ -91,7 +91,7 @@ export function Button({
 
 	const commonProps = {
 		ref,
-		className: twcx(button({ variant, block, disabled: propDisabled, loading, ...restProps }), className),
+		className: cn(button({ variant, block, disabled: propDisabled, loading, ...restProps }), className),
 		disabled: propDisabled,
 		...restProps,
 	};
@@ -99,7 +99,7 @@ export function Button({
 	let content = children;
 
 	if (loading) {
-		content = loadingContent ?? <Spinner className={twcx(classNames?.spinner)} />;
+		content = loadingContent ?? <Spinner className={cn(classNames?.spinner)} />;
 	}
 
 	useUpdateEffect(() => {

@@ -2,7 +2,7 @@ import type { ElProps } from "@Shared/types";
 import type { ComponentProps } from "react";
 
 import { Link as NextLink } from "@Shared/i18n";
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 
 import { LinkSimple } from "./Simple";
 
@@ -22,7 +22,7 @@ export function Link({ className, href, simple, email, children, ...restProps }:
 	}
 
 	const commonLinkProps = {
-		className: twcx(
+		className: cn(
 			{
 				"text-nowrap": email,
 			},

@@ -1,6 +1,6 @@
 import type { ClassValue } from "clsx";
 
-import cx from "clsx";
+import clsx from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
 export const twMerge = extendTailwindMerge({
@@ -41,4 +41,4 @@ export const twMerge = extendTailwindMerge({
 	},
 });
 
-export const twcx = (...args: ClassValue[]) => twMerge(cx(args));
+export const cn = (...args: ClassValue[]) => twMerge(clsx(args));

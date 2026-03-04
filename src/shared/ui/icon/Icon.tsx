@@ -4,7 +4,7 @@ import type { IconsKeys } from "./collection";
 
 import { cva } from "class-variance-authority";
 
-import { twcx } from "@Shared/utils";
+import { cn } from "@Shared/utils";
 
 import { IconsCollection } from "./collection";
 import styles from "./styles.module.css";
@@ -38,5 +38,5 @@ export function Icon({ className, k, ...restProps }: IconProps) {
 		return null;
 	}
 
-	return <Component className={twcx(icon(restProps), className)} {...restProps} />;
+	return <Component className={cn(icon(restProps), className)} {...restProps} />;
 }
