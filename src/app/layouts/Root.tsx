@@ -34,8 +34,7 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 			<body
 				id="__next"
 				className={cn(
-					"font-primary bg-background text-text text-body-d flex min-h-dvh w-full flex-col overflow-x-clip overscroll-none scroll-smooth antialiased",
-					"lg:text-body",
+					"font-primary bg-background text-foreground flex min-h-dvh w-full flex-col overflow-x-clip overscroll-none scroll-smooth antialiased",
 				)}
 			>
 				<Providers locale={locale as Locale}>

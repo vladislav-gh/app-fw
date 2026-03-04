@@ -1,10 +1,4 @@
 @layer base {
-	*,
-	*::before,
-	*::after {
-		outline: none;
-	}
-
 	html {
 		&.is-scroll-locked {
 			overflow: clip;
@@ -71,9 +65,7 @@
 	}
 
 	.hide-scrollbar {
-		@supports not selector(::-webkit-scrollbar) {
-			scrollbar-width: 0;
-		}
+		scrollbar-width: 0;
 
 		&::-webkit-scrollbar {
 			display: none;
