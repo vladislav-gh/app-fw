@@ -39,8 +39,8 @@ export type Database = {
 					id: string;
 					is_system: boolean;
 					name: string | null;
-					order_index: number;
 					slug: string | null;
+					sort_index: number;
 					user_id: string | null;
 				};
 				Insert: {
@@ -48,8 +48,8 @@ export type Database = {
 					id?: string;
 					is_system?: boolean;
 					name?: string | null;
-					order_index?: number;
 					slug?: string | null;
+					sort_index?: number;
 					user_id?: string | null;
 				};
 				Update: {
@@ -57,8 +57,8 @@ export type Database = {
 					id?: string;
 					is_system?: boolean;
 					name?: string | null;
-					order_index?: number;
 					slug?: string | null;
+					sort_index?: number;
 					user_id?: string | null;
 				};
 				Relationships: [];
