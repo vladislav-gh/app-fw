@@ -130,24 +130,30 @@ export type Database = {
 					created_at: string;
 					description: string | null;
 					id: string;
-					is_system: boolean | null;
-					name: string;
+					is_system: boolean;
+					name: string | null;
+					slug: string | null;
+					sort_index: number;
 					user_id: string | null;
 				};
 				Insert: {
 					created_at?: string;
 					description?: string | null;
 					id?: string;
-					is_system?: boolean | null;
-					name: string;
+					is_system?: boolean;
+					name?: string | null;
+					slug?: string | null;
+					sort_index?: number;
 					user_id?: string | null;
 				};
 				Update: {
 					created_at?: string;
 					description?: string | null;
 					id?: string;
-					is_system?: boolean | null;
-					name?: string;
+					is_system?: boolean;
+					name?: string | null;
+					slug?: string | null;
+					sort_index?: number;
 					user_id?: string | null;
 				};
 				Relationships: [];
