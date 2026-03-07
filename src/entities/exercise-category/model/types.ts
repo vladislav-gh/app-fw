@@ -8,3 +8,25 @@ export interface ExerciseCategory {
 	name: string | null;
 	isSystem: boolean;
 }
+
+export interface ExerciseCategoryRepositoryGetUserOptions {
+	userId: string;
+}
+
+export interface ExerciseCategoryGetUserDTO {
+	userId: string;
+}
+
+export interface ExerciseCategoryCreateDTO {
+	userId: string;
+	name: string;
+}
+
+export interface ExerciseCategoryUpdateDTO {
+	categoryId: string;
+	name: string;
+}
+
+export interface ExerciseCategoryDeleteDTO {
+	categoryId: string;
+}

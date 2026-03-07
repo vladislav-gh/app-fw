@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { ExerciseCategory, ExerciseCategoryRow } from "../model";
+import type { ExerciseCategory, ExerciseCategoryRepositoryGetUserOptions, ExerciseCategoryRow } from "../model";
 
 import { createSupabaseRepository } from "@Shared/api/supabase";
 
@@ -27,7 +27,7 @@ export function createExerciseCategoryRepository(supabase: SupabaseClient) {
 			return mapExerciseCategories(data);
 		},
 
-		async getUser(userId: string) {
+		async getUser({ userId }: ExerciseCategoryRepositoryGetUserOptions) {
 			const { data, error } = await supabase
 				.from("exercise_categories")
 				.select("*")
