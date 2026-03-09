@@ -1,3 +1,5 @@
+"use server";
+
 import type { ForgotPasswordDTO, SignInDTO, SignUpDTO } from "../model";
 
 import { createClientServer } from "@Shared/api/supabase";
