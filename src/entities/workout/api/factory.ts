@@ -7,3 +7,15 @@ export async function getWorkoutRepository() {
 
 	return createWorkoutRepository(supabase);
 }
+
+export async function getWorkoutExerciseRepository() {
+	const supabase = await createClientServer();
+
+	return createWorkoutRepository(supabase);
+}
+
+export async function getWorkoutExerciseSetRepository() {
+	const supabase = await createClientServer();
+
+	return createWorkoutRepository(supabase);
+}

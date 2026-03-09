@@ -187,7 +187,7 @@ export type Database = {
 			};
 			workout_exercises: {
 				Row: {
-					categories: Json | null;
+					categories: Json[] | null;
 					created_at: string;
 					exercise_id: string | null;
 					id: string;
@@ -196,7 +196,7 @@ export type Database = {
 					workout_id: string;
 				};
 				Insert: {
-					categories?: Json | null;
+					categories?: Json[] | null;
 					created_at?: string;
 					exercise_id?: string | null;
 					id?: string;
@@ -205,7 +205,7 @@ export type Database = {
 					workout_id: string;
 				};
 				Update: {
-					categories?: Json | null;
+					categories?: Json[] | null;
 					created_at?: string;
 					exercise_id?: string | null;
 					id?: string;
