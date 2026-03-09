@@ -93,38 +93,6 @@ export type Database = {
 					},
 				];
 			};
-			exercise_sets: {
-				Row: {
-					id: string;
-					order_index: number;
-					reps: number;
-					weight: number | null;
-					workout_exercise_id: string | null;
-				};
-				Insert: {
-					id?: string;
-					order_index: number;
-					reps: number;
-					weight?: number | null;
-					workout_exercise_id?: string | null;
-				};
-				Update: {
-					id?: string;
-					order_index?: number;
-					reps?: number;
-					weight?: number | null;
-					workout_exercise_id?: string | null;
-				};
-				Relationships: [
-					{
-						foreignKeyName: "exercise_sets_workout_exercise_id_fkey";
-						columns: ["workout_exercise_id"];
-						isOneToOne: false;
-						referencedRelation: "workout_exercises";
-						referencedColumns: ["id"];
-					},
-				];
-			};
 			exercises: {
 				Row: {
 					created_at: string;
@@ -185,30 +153,62 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			workout_exercise_sets: {
+				Row: {
+					id: string;
+					reps: number;
+					sort_index: number;
+					weight: number | null;
+					workout_exercise_id: string;
+				};
+				Insert: {
+					id?: string;
+					reps: number;
+					sort_index?: number;
+					weight?: number | null;
+					workout_exercise_id: string;
+				};
+				Update: {
+					id?: string;
+					reps?: number;
+					sort_index?: number;
+					weight?: number | null;
+					workout_exercise_id?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: "exercise_sets_workout_exercise_id_fkey";
+						columns: ["workout_exercise_id"];
+						isOneToOne: false;
+						referencedRelation: "workout_exercises";
+						referencedColumns: ["id"];
+					},
+				];
+			};
 			workout_exercises: {
 				Row: {
 					created_at: string;
-					custom_name: string | null;
 					exercise_id: string | null;
 					id: string;
-					order_index: number;
-					workout_id: string | null;
+					name: string | null;
+					sort_index: number;
+					workout_id: string;
 				};
 				Insert: {
 					created_at?: string;
-					custom_name?: string | null;
 					exercise_id?: string | null;
 					id?: string;
-					order_index: number;
-					workout_id?: string | null;
+					name?: string | null;
+					sort_index?: number;
+					workout_id: string;
 				};
 				Update: {
 					created_at?: string;
-					custom_name?: string | null;
 					exercise_id?: string | null;
 					id?: string;
-					order_index?: number;
-					workout_id?: string | null;
+					name?: string | null;
+					sort_index?: number;
+					workout_id?: string;
 				};
 				Relationships: [
 					{
@@ -234,16 +234,16 @@ export type Database = {
 					duration: number | null;
 					id: string;
 					notes: string | null;
-					user_id: string | null;
+					user_id: string;
 					user_weight: number | null;
 				};
 				Insert: {
 					created_at?: string;
-					date: string;
+					date?: string;
 					duration?: number | null;
 					id?: string;
 					notes?: string | null;
-					user_id?: string | null;
+					user_id: string;
 					user_weight?: number | null;
 				};
 				Update: {
@@ -252,7 +252,7 @@ export type Database = {
 					duration?: number | null;
 					id?: string;
 					notes?: string | null;
-					user_id?: string | null;
+					user_id?: string;
 					user_weight?: number | null;
 				};
 				Relationships: [];
