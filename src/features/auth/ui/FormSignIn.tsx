@@ -7,12 +7,12 @@ import { useActionState, useEffect } from "react";
 import { Button, Input } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 
-import { signIn } from "../actions";
+import { signInAction } from "../api";
 
 export type FormSingInProps = ElProps<"form">;
 
 export function FormSignIn({ className, ...restProps }: FormSingInProps) {
-	const [state, dispatchAction] = useActionState(signIn, null);
+	const [state, dispatchAction] = useActionState(signInAction, null);
 
 	useEffect(() => {
 		console.log("sign in state:", state);

@@ -1,15 +1,8 @@
-"use server";
+import type { ForgotPasswordDTO, SignInDTO, SignUpDTO } from "../model";
 
 import { createClientServer } from "@Shared/api/supabase";
 
-export async function signUp(_prevState: unknown, formData: FormData) {
-	const email = formData.get("email")?.toString().trim();
-	const password = formData.get("password")?.toString().trim();
-
-	if (!email || !password) {
-		return { success: false, error: "Missing email or password" };
-	}
-
+export async function signUp({ email, password }: SignUpDTO) {
 	const sb = await createClientServer();
 
 	const { error } = await sb.auth.signUp({ email, password });
@@ -21,14 +14,7 @@ export async function signUp(_prevState: unknown, formData: FormData) {
 	return { success: true };
 }
 
-export async function signIn(_prevState: unknown, formData: FormData) {
-	const email = formData.get("email")?.toString().trim();
-	const password = formData.get("password")?.toString().trim();
-
-	if (!email || !password) {
-		return { success: false, error: "Missing email or password" };
-	}
-
+export async function signIn({ email, password }: SignInDTO) {
 	const sb = await createClientServer();
 
 	const { error } = await sb.auth.signInWithPassword({ email, password });
@@ -40,13 +26,7 @@ export async function signIn(_prevState: unknown, formData: FormData) {
 	return { success: true };
 }
 
-export async function forgotPassword(_prevState: unknown, formData: FormData) {
-	const email = formData.get("email")?.toString().trim();
-
-	if (!email) {
-		return { success: false, error: "Missing email" };
-	}
-
+export async function forgotPassword({ email }: ForgotPasswordDTO) {
 	const sb = await createClientServer();
 
 	const { error } = await sb.auth.resetPasswordForEmail(email);

@@ -7,12 +7,12 @@ import { useActionState, useEffect } from "react";
 import { Button, Input } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 
-import { forgotPassword } from "../actions";
+import { forgotPasswordAction } from "../api";
 
 export type FormForgotPasswordProps = ElProps<"form">;
 
 export function FormForgotPassword({ className, ...restProps }: FormForgotPasswordProps) {
-	const [state, dispatchAction] = useActionState(forgotPassword, null);
+	const [state, dispatchAction] = useActionState(forgotPasswordAction, null);
 
 	useEffect(() => {
 		console.log("forgot password state:", state);

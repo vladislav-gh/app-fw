@@ -6,12 +6,12 @@ import { useActionState, useEffect } from "react";
 
 import { Button } from "@Shared/ui";
 
-import { signOut } from "../actions";
+import { signOutAction } from "../api";
 
 export type ButtonSignOutProps = ElProps<"form">;
 
 export function ButtonSignOut({ ...restProps }: ButtonSignOutProps) {
-	const [state, dispatchAction] = useActionState(signOut, null);
+	const [state, dispatchAction] = useActionState(signOutAction, null);
 
 	useEffect(() => {
 		console.log("sign out state:", state);
