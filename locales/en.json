@@ -7,6 +7,19 @@
 		"light": "Light theme",
 		"system": "System theme"
 	},
+	"exerciseCategories": {
+		"legs": "Legs",
+		"back": "Back",
+		"chest": "Chest",
+		"shoulders": "Shoulders",
+		"biceps": "Biceps",
+		"triceps": "Triceps",
+		"core": "Core"
+	},
+	"exercises": {
+		"barbell-bench-press": "Barbell bench press",
+		"barbell-back-squat": "Barbell back squat"
+	},
 	"pageNotFound": {
 		"buttons": {
 			"home": "Go Home"

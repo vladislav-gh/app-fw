@@ -7,6 +7,19 @@
 		"light": "Светлая тема",
 		"system": "Системная тема"
 	},
+	"exerciseCategories": {
+		"legs": "Ноги",
+		"back": "Спина",
+		"chest": "Грудь",
+		"shoulders": "Плечи",
+		"biceps": "Бицепс",
+		"triceps": "Трицепс",
+		"core": "Пресс"
+	},
+	"exercises": {
+		"barbell-bench-press": "Жим лежа",
+		"barbell-back-squat": "Приседания"
+	},
 	"pageNotFound": {
 		"buttons": {
 			"home": "Вернуться на главную"

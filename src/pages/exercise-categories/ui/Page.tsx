@@ -2,6 +2,8 @@ import type { Locale } from "next-intl";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { getExerciseCategoriesSystem } from "@Entities/exercise-category";
+
 export interface PageProps {
 	params: Promise<{ locale: Locale }>;
 }
@@ -12,6 +14,23 @@ export async function Page({ params }: PageProps) {
 	setRequestLocale(locale);
 
 	const t = await getTranslations("pageExerciseCategories");
+	const tExerciseCategories = await getTranslations("exerciseCategories");
 
-	return <main className="flex flex-col gap-25">{t("title")}</main>;
+	const exerciseCategories = await getExerciseCategoriesSystem();
+
+	return (
+		<main className="flex flex-col gap-25">
+			{t("title")}
+
+			<div className="flex flex-col gap-3">
+				{exerciseCategories.map(category => (
+					<div key={category.id}>
+						{category.slug
+							? tExerciseCategories(category.slug as Parameters<typeof tExerciseCategories>[0])
+							: category.name}
+					</div>
+				))}
+			</div>
+		</main>
+	);
 }
