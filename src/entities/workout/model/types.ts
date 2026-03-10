@@ -42,6 +42,10 @@ export interface Workout {
 	exercises: WorkoutExercise[];
 }
 
+export interface WorkoutGetDTO {
+	workoutId: string;
+}
+
 export interface WorkoutCreateDTO {
 	userId: string;
 	date?: string;
@@ -50,7 +54,7 @@ export interface WorkoutCreateDTO {
 	notes?: string | null;
 }
 
-export interface WorkoutUpdateDTO extends Omit<WorkoutCreateDTO, "userId"> {
+export interface WorkoutUpdateDTO extends Partial<Omit<WorkoutCreateDTO, "userId">> {
 	workoutId: string;
 }
 
@@ -61,10 +65,10 @@ export interface WorkoutDeleteDTO {
 export interface WorkoutExerciseCreateDTO {
 	workoutId: string;
 	name: string;
-	category: string;
+	categories: WorkoutExerciseCategory[];
 }
 
-export interface WorkoutExerciseUpdateDTO extends Omit<WorkoutExerciseCreateDTO, "workoutId"> {
+export interface WorkoutExerciseUpdateDTO extends Partial<Omit<WorkoutExerciseCreateDTO, "workoutId">> {
 	exerciseId: string;
 }
 
@@ -78,7 +82,7 @@ export interface WorkoutExerciseSetCreateDTO {
 	weight?: number | null;
 }
 
-export interface WorkoutExerciseSetUpdateDTO extends Omit<WorkoutExerciseSetCreateDTO, "exerciseId"> {
+export interface WorkoutExerciseSetUpdateDTO extends Partial<Omit<WorkoutExerciseSetCreateDTO, "exerciseId">> {
 	setId: string;
 }
 
