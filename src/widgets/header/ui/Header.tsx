@@ -9,6 +9,10 @@ export function Header() {
 			<Link href={PAGES.signIn}>Sign In</Link>
 			<Link href={PAGES.forgotPassword}>Forgot Password</Link>
 			<Link href={PAGES.profile}>Profile</Link>
+			<Link href={PAGES.workouts}>Workouts</Link>
+			<Link href={PAGES.workout("1")}>Workout #1</Link>
+			<Link href={PAGES.exercises}>Exercises</Link>
+			<Link href={PAGES.exerciseCategories}>Exercise Categories</Link>
 		</header>
 	);
 }

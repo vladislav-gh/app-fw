@@ -29,5 +29,17 @@
 	},
 	"pageProfile": {
 		"title": "Profile"
+	},
+	"pageWorkout": {
+		"title": "Workout"
+	},
+	"pageWorkouts": {
+		"title": "Workouts"
+	},
+	"pageExercises": {
+		"title": "Exercises"
+	},
+	"pageExerciseCategories": {
+		"title": "Exercise Categories"
 	}
 }

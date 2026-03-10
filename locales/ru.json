@@ -29,5 +29,17 @@
 	},
 	"pageProfile": {
 		"title": "Профиль"
+	},
+	"pageWorkout": {
+		"title": "Тренировка"
+	},
+	"pageWorkouts": {
+		"title": "Тренировки"
+	},
+	"pageExercises": {
+		"title": "Упражнения"
+	},
+	"pageExerciseCategories": {
+		"title": "Категории упражнений"
 	}
 }
