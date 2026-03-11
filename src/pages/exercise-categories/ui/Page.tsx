@@ -2,7 +2,7 @@ import type { Locale } from "next-intl";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { getExerciseCategoriesSystem } from "@Entities/exercise-category";
+import { CardExerciseCategory, getExerciseCategoriesSystem } from "@Entities/exercise-category";
 
 export interface PageProps {
 	params: Promise<{ locale: Locale }>;
@@ -24,11 +24,15 @@ export async function Page({ params }: PageProps) {
 
 			<div className="flex flex-col gap-3">
 				{exerciseCategories.map(category => (
-					<div key={category.id}>
-						{category.slug
-							? tExerciseCategories(category.slug as Parameters<typeof tExerciseCategories>[0])
-							: category.name}
-					</div>
+					<CardExerciseCategory
+						key={category.id}
+						categoryId={category.id}
+						categoryName={String(
+							category.slug
+								? tExerciseCategories(category.slug as Parameters<typeof tExerciseCategories>[0])
+								: category.name,
+						)}
+					/>
 				))}
 			</div>
 		</main>
