@@ -1,3 +1,3 @@
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 
 export { Page as default } from "@Pages/exercise-categories";
