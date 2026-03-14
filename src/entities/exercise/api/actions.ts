@@ -2,6 +2,10 @@
 
 import type { ExerciseCreateDTO, ExerciseDeleteDTO, ExerciseGetUserDTO, ExerciseUpdateDTO } from "../model";
 
+import { revalidatePath } from "next/cache";
+
+import { PAGES } from "@Shared/config";
+
 import { getExerciseRepository } from "./factory";
 
 export async function getExercisesSystem() {
@@ -18,8 +22,7 @@ export async function getExercisesUser({ userId }: ExerciseGetUserDTO) {
 
 export async function createExercise({ userId, name, description, categoryIds }: ExerciseCreateDTO) {
 	const repo = await getExerciseRepository();
-
-	return repo.insert({
+	const result = await repo.insert({
 		payload: {
 			user_id: userId,
 			name,
@@ -28,12 +31,15 @@ export async function createExercise({ userId, name, description, categoryIds }:
 		},
 		categoryIds,
 	});
+
+	revalidatePath(PAGES.exercises);
+
+	return result;
 }
 
 export async function updateExercise({ exerciseId, name, description, categoryIds }: ExerciseUpdateDTO) {
 	const repo = await getExerciseRepository();
-
-	return repo.update({
+	const result = await repo.update({
 		id: exerciseId,
 		payload: {
 			name,
@@ -41,10 +47,17 @@ export async function updateExercise({ exerciseId, name, description, categoryId
 		},
 		categoryIds,
 	});
+
+	revalidatePath(PAGES.exercises);
+
+	return result;
 }
 
 export async function deleteExercise({ exerciseId }: ExerciseDeleteDTO) {
 	const repo = await getExerciseRepository();
+	const result = await repo.delete({ id: exerciseId });
 
-	return repo.delete({ id: exerciseId });
+	revalidatePath(PAGES.exercises);
+
+	return result;
 }

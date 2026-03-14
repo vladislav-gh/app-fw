@@ -41,7 +41,7 @@ export interface ExerciseCreateDTO {
 	categoryIds?: string[];
 }
 
-export interface ExerciseUpdateDTO extends Omit<ExerciseCreateDTO, "userId"> {
+export interface ExerciseUpdateDTO extends Partial<Omit<ExerciseCreateDTO, "userId">> {
 	exerciseId: string;
 }
 

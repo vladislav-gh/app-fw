@@ -68,7 +68,7 @@ export function createExerciseRepository(supabase: SupabaseClient) {
 				if (errorInsertCategories) throw errorInsertCategories;
 			}
 
-			return await this.getById(data.id);
+			return await this.getById({ id: data.id });
 		},
 
 		async update({ id, payload, categoryIds }: ExerciseRepositoryUpdateOptions) {
