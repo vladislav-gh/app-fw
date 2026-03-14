@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { CardExercise, getExercisesUser } from "@Entities/exercise";
 import { getUser } from "@Entities/user";
 
@@ -7,6 +9,8 @@ export async function ListUser() {
 	if (!user) {
 		return null;
 	}
+
+	const tExerciseCategories = await getTranslations("exerciseCategories");
 
 	const exercisesUser = await getExercisesUser({ userId: user.id });
 
@@ -18,6 +22,13 @@ export async function ListUser() {
 					exerciseId={exercise.id}
 					exerciseName={String(exercise.name)}
 					exerciseDescription={exercise.description ?? undefined}
+					exerciseCategories={exercise.categories.map(category =>
+						String(
+							category.slug
+								? tExerciseCategories(category.slug as Parameters<typeof tExerciseCategories>[0])
+								: category.name,
+						),
+					)}
 					isEditable
 					isRemovable
 				/>

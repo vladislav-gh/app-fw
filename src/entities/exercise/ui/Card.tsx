@@ -6,7 +6,7 @@ import type { ExerciseUpdateDTO } from "../model";
 import { useEffect, useRef, useState } from "react";
 import { CheckIcon, EditIcon, TrashIcon } from "lucide-react";
 
-import { Button, Card, CardDescription, CardFooter, CardTitle, Input, Textarea } from "@Shared/ui";
+import { Badge, Button, Card, CardDescription, CardFooter, CardTitle, Input, Textarea } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 
 import { deleteExercise, updateExercise } from "../api";
@@ -15,6 +15,7 @@ export interface CardExerciseProps extends ElProps<"div"> {
 	exerciseId: string;
 	exerciseName: string;
 	exerciseDescription?: string;
+	exerciseCategories?: string[];
 	isEditable?: boolean;
 	isRemovable?: boolean;
 }
@@ -24,6 +25,7 @@ export function CardExercise({
 	exerciseId,
 	exerciseName,
 	exerciseDescription,
+	exerciseCategories,
 	isEditable,
 	isRemovable,
 	...restProps
@@ -87,6 +89,16 @@ export function CardExercise({
 						exerciseDescription
 					)}
 				</CardDescription>
+			)}
+
+			{!!exerciseCategories?.length && (
+				<div className="flex items-center flex-wrap gap-1">
+					{exerciseCategories.map(category => (
+						<Badge key={category} variant="secondary">
+							{category}
+						</Badge>
+					))}
+				</div>
 			)}
 
 			{(isEditable || isRemovable) && (
