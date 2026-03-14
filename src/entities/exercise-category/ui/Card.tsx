@@ -5,7 +5,7 @@ import type { ElProps } from "@Shared/types";
 import { useEffect, useRef, useState } from "react";
 import { CheckIcon, EditIcon, TrashIcon } from "lucide-react";
 
-import { Button, Card, CardContent, CardTitle, Input } from "@Shared/ui";
+import { Button, Card, CardTitle, Input } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 
 import { deleteExerciseCategory, updateExerciseCategory } from "../api";
@@ -52,38 +52,36 @@ export function CardExerciseCategory({
 	}, [isEditing]);
 
 	return (
-		<Card className={cn("gap-0 py-4", className)} {...restProps}>
-			<CardContent className="flex items-center gap-4 px-4 justify-between">
-				<CardTitle className="grow font-bold">
-					{isEditing ? (
-						<Input ref={refInputName} placeholder="Enter category name" defaultValue={categoryName} />
-					) : (
-						categoryName
-					)}
-				</CardTitle>
-
-				{(isEditable || isRemovable) && (
-					<div className="flex items-center gap-2">
-						{isEditable && !isEditing && (
-							<Button variant="outline" size="icon" aria-label="Edit" onClick={handleClickEdit}>
-								<EditIcon />
-							</Button>
-						)}
-
-						{isEditable && isEditing && (
-							<Button variant="outline" size="icon" aria-label="Save" onClick={handleClickSave}>
-								<CheckIcon />
-							</Button>
-						)}
-
-						{isRemovable && (
-							<Button variant="outline" size="icon" aria-label="Remove" onClick={handleClickRemove}>
-								<TrashIcon />
-							</Button>
-						)}
-					</div>
+		<Card className={cn("flex items-center gap-4 justify-between p-4 flex-row", className)} {...restProps}>
+			<CardTitle className="grow font-bold">
+				{isEditing ? (
+					<Input ref={refInputName} placeholder="Enter category name" defaultValue={categoryName} />
+				) : (
+					categoryName
 				)}
-			</CardContent>
+			</CardTitle>
+
+			{(isEditable || isRemovable) && (
+				<div className="flex items-center gap-2">
+					{isEditable && !isEditing && (
+						<Button variant="outline" size="icon" aria-label="Edit" onClick={handleClickEdit}>
+							<EditIcon />
+						</Button>
+					)}
+
+					{isEditable && isEditing && (
+						<Button variant="outline" size="icon" aria-label="Save" onClick={handleClickSave}>
+							<CheckIcon />
+						</Button>
+					)}
+
+					{isRemovable && (
+						<Button variant="outline" size="icon" aria-label="Remove" onClick={handleClickRemove}>
+							<TrashIcon />
+						</Button>
+					)}
+				</div>
+			)}
 		</Card>
 	);
 }
