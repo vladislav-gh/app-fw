@@ -4,5 +4,6 @@ export * from "./link";
 export * from "./shadcn/components/ui/button";
 export * from "./shadcn/components/ui/card";
 export * from "./shadcn/components/ui/input";
+export * from "./shadcn/components/ui/textarea";
 export * from "./spinner";
 export * from "./typography";
