@@ -1,18 +1,26 @@
-import { CardExerciseCategory, getExerciseCategoriesUser } from "@Entities/exercise-category";
-import { getUser } from "@Entities/user";
+"use client";
 
-export async function ListUser() {
-	const user = await getUser();
+import { useQuery } from "@tanstack/react-query";
+
+import { CardExerciseCategory, getQueryOptionsExerciseCategoryUser } from "@Entities/exercise-category";
+import { getQueryOptionsUser } from "@Entities/user";
+
+export function ListUser() {
+	const { data: user } = useQuery({
+		...getQueryOptionsUser(),
+	});
+
+	const { data: exerciseCategoriesUser } = useQuery({
+		...getQueryOptionsExerciseCategoryUser(user?.id ?? ""),
+	});
 
 	if (!user) {
 		return null;
 	}
 
-	const exerciseCategoriesUser = await getExerciseCategoriesUser({ userId: user.id });
-
 	return (
 		<div className="flex flex-col gap-3">
-			{exerciseCategoriesUser.map(category => (
+			{exerciseCategoriesUser?.map(category => (
 				<CardExerciseCategory
 					key={category.id}
 					categoryId={category.id}
