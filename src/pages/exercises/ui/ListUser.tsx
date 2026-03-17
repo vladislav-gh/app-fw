@@ -1,22 +1,28 @@
-import { getTranslations } from "next-intl/server";
+"use client";
 
-import { CardExercise, getExercisesUser } from "@Entities/exercise";
-import { getUser } from "@Entities/user";
+import { useTranslations } from "next-intl";
+import { useQuery } from "@tanstack/react-query";
 
-export async function ListUser() {
-	const user = await getUser();
+import { CardExercise, getQueryOptionsExercisesUser } from "@Entities/exercise";
+import { getQueryOptionsUser } from "@Entities/user";
 
-	if (!user) {
+export function ListUser() {
+	const tExerciseCategories = useTranslations("exerciseCategories");
+	const { data: user } = useQuery({
+		...getQueryOptionsUser(),
+	});
+
+	const { data: exercisesUser } = useQuery({
+		...getQueryOptionsExercisesUser(user?.id ?? ""),
+	});
+
+	if (!user || !exercisesUser?.length) {
 		return null;
 	}
 
-	const tExerciseCategories = await getTranslations("exerciseCategories");
-
-	const exercisesUser = await getExercisesUser({ userId: user.id });
-
 	return (
 		<div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-			{exercisesUser.map(exercise => (
+			{exercisesUser?.map(exercise => (
 				<CardExercise
 					key={exercise.id}
 					exerciseId={exercise.id}
