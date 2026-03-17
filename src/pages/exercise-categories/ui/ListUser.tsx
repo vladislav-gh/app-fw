@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { CardExerciseCategory, getQueryOptionsExerciseCategoryUser } from "@Entities/exercise-category";
+import { CardExerciseCategory, getQueryOptionsExerciseCategoriesUser } from "@Entities/exercise-category";
 import { getQueryOptionsUser } from "@Entities/user";
 
 export function ListUser() {
@@ -11,10 +11,10 @@ export function ListUser() {
 	});
 
 	const { data: exerciseCategoriesUser } = useQuery({
-		...getQueryOptionsExerciseCategoryUser(user?.id ?? ""),
+		...getQueryOptionsExerciseCategoriesUser(user?.id ?? ""),
 	});
 
-	if (!user) {
+	if (!user || !exerciseCategoriesUser?.length) {
 		return null;
 	}
 
