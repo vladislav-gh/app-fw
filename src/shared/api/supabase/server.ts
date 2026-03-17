@@ -1,3 +1,5 @@
+"use server";
+
 import type { Database } from "./types";
 
 import { cookies } from "next/headers";
