@@ -1,9 +1,10 @@
 "use server";
 
-import type { ExerciseCreateDTO, ExerciseDeleteDTO, ExerciseGetUserDTO, ExerciseUpdateDTO } from "../model";
+import type { ExerciseCreateDTO, ExerciseDeleteDTO, ExerciseUpdateDTO } from "../model";
 
 import { revalidatePath } from "next/cache";
 
+import { getSupabaseUser } from "@Shared/api/supabase";
 import { PAGES } from "@Shared/config";
 
 import { getExerciseRepository } from "./factory";
@@ -14,17 +15,19 @@ export async function getExercisesSystem() {
 	return repo.getSystem();
 }
 
-export async function getExercisesUser({ userId }: ExerciseGetUserDTO) {
+export async function getExercisesUser() {
+	const user = await getSupabaseUser();
 	const repo = await getExerciseRepository();
 
-	return repo.getUser({ userId });
+	return repo.getUser({ userId: user.id });
 }
 
-export async function createExercise({ userId, name, description, categoryIds }: ExerciseCreateDTO) {
+export async function createExercise({ name, description, categoryIds }: ExerciseCreateDTO) {
+	const user = await getSupabaseUser();
 	const repo = await getExerciseRepository();
 	const result = await repo.insert({
 		payload: {
-			user_id: userId,
+			user_id: user.id,
 			name,
 			description,
 			is_system: false,

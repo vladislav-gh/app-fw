@@ -30,18 +30,13 @@ export interface ExerciseRepositoryUpdateOptions extends RepositoryUpdateOptions
 	categoryIds?: string[];
 }
 
-export interface ExerciseGetUserDTO {
-	userId: string;
-}
-
 export interface ExerciseCreateDTO {
-	userId: string;
 	name: string;
 	description?: string;
 	categoryIds?: string[];
 }
 
-export interface ExerciseUpdateDTO extends Partial<Omit<ExerciseCreateDTO, "userId">> {
+export interface ExerciseUpdateDTO extends Partial<ExerciseCreateDTO> {
 	exerciseId: string;
 }
 
