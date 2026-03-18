@@ -3,12 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { CardExerciseCategory, getQueryOptionsExerciseCategoriesUser } from "@Entities/exercise-category";
-import { getQueryOptionsUser } from "@Entities/user";
+import { useUser } from "@Entities/user";
 
 export function ListUser() {
-	const { data: user } = useQuery({
-		...getQueryOptionsUser(),
-	});
+	const user = useUser();
 
 	const { data: exerciseCategoriesUser } = useQuery({
 		...getQueryOptionsExerciseCategoriesUser(user?.id ?? ""),
