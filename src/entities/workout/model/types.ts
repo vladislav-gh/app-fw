@@ -47,14 +47,13 @@ export interface WorkoutGetDTO {
 }
 
 export interface WorkoutCreateDTO {
-	userId: string;
 	date?: string;
 	duration?: number | null;
 	userWeight?: number | null;
 	notes?: string | null;
 }
 
-export interface WorkoutUpdateDTO extends Partial<Omit<WorkoutCreateDTO, "userId">> {
+export interface WorkoutUpdateDTO extends Partial<WorkoutCreateDTO> {
 	workoutId: string;
 }
 
