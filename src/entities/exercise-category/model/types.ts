@@ -13,18 +13,12 @@ export interface ExerciseCategoryRepositoryGetUserOptions {
 	userId: string;
 }
 
-export interface ExerciseCategoryGetUserDTO {
-	userId: string;
-}
-
 export interface ExerciseCategoryCreateDTO {
-	userId: string;
 	name: string;
 }
 
-export interface ExerciseCategoryUpdateDTO {
+export interface ExerciseCategoryUpdateDTO extends Partial<ExerciseCategoryCreateDTO> {
 	categoryId: string;
-	name: string;
 }
 
 export interface ExerciseCategoryDeleteDTO {

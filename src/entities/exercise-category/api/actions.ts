@@ -1,14 +1,10 @@
 "use server";
 
-import type {
-	ExerciseCategoryCreateDTO,
-	ExerciseCategoryDeleteDTO,
-	ExerciseCategoryGetUserDTO,
-	ExerciseCategoryUpdateDTO,
-} from "../model";
+import type { ExerciseCategoryCreateDTO, ExerciseCategoryDeleteDTO, ExerciseCategoryUpdateDTO } from "../model";
 
 import { revalidatePath } from "next/cache";
 
+import { getSupabaseUser } from "@Shared/api/supabase";
 import { PAGES } from "@Shared/config";
 
 import { getExerciseCategoryRepository } from "./factory";
@@ -19,16 +15,18 @@ export async function getExerciseCategoriesSystem() {
 	return repo.getSystem();
 }
 
-export async function getExerciseCategoriesUser({ userId }: ExerciseCategoryGetUserDTO) {
+export async function getExerciseCategoriesUser() {
+	const user = await getSupabaseUser();
 	const repo = await getExerciseCategoryRepository();
 
-	return repo.getUser({ userId });
+	return repo.getUser({ userId: user.id });
 }
 
-export async function createExerciseCategory({ userId, name }: ExerciseCategoryCreateDTO) {
+export async function createExerciseCategory({ name }: ExerciseCategoryCreateDTO) {
+	const user = await getSupabaseUser();
 	const repo = await getExerciseCategoryRepository();
 
-	const result = await repo.insert({ payload: { user_id: userId, name, is_system: false } });
+	const result = await repo.insert({ payload: { user_id: user.id, name, is_system: false } });
 
 	revalidatePath(PAGES.exerciseCategories);
 

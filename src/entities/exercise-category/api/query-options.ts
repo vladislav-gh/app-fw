@@ -6,6 +6,6 @@ import { QUERY_KEYS_EXERCISE_CATEGORY } from "./query-keys";
 export const getQueryOptionsExerciseCategoriesUser = (userId: string) =>
 	queryOptions({
 		queryKey: QUERY_KEYS_EXERCISE_CATEGORY.user(userId),
-		queryFn: () => getExerciseCategoriesUser({ userId }),
+		queryFn: getExerciseCategoriesUser,
 		enabled: !!userId,
 	});
