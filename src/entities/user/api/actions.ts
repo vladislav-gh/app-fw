@@ -2,28 +2,19 @@
 
 import type { UserUpdateDTO } from "../model";
 
-import { getUserFromSupabase } from "../utils";
+import { getSupabaseUser } from "@Shared/api/supabase";
+
 import { getUserRepository } from "./factory";
 
 export async function getUser() {
-	const user = await getUserFromSupabase();
-
-	if (!user) {
-		return null;
-	}
-
+	const user = await getSupabaseUser();
 	const repo = await getUserRepository();
 
 	return repo.getById({ id: user.id });
 }
 
 export async function updateUser({ name, nickname, weight, birthDate }: UserUpdateDTO) {
-	const user = await getUserFromSupabase();
-
-	if (!user) {
-		throw new Error("Unauthorized");
-	}
-
+	const user = await getSupabaseUser();
 	const repo = await getUserRepository();
 
 	return repo.update({
