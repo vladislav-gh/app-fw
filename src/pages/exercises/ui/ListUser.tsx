@@ -4,13 +4,11 @@ import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 
 import { CardExercise, getQueryOptionsExercisesUser } from "@Entities/exercise";
-import { getQueryOptionsUser } from "@Entities/user";
+import { useUser } from "@Entities/user";
 
 export function ListUser() {
 	const tExerciseCategories = useTranslations("exerciseCategories");
-	const { data: user } = useQuery({
-		...getQueryOptionsUser(),
-	});
+	const user = useUser();
 
 	const { data: exercisesUser } = useQuery({
 		...getQueryOptionsExercisesUser(user?.id ?? ""),
