@@ -1,4 +1,5 @@
-import { createClientServer } from "@Shared/api/supabase";
+import { createClientBrowser, createClientServer } from "@Shared/api/supabase";
+import { IS_SERVER } from "@Shared/config";
 
 import {
 	createWorkoutExerciseRepository,
@@ -7,19 +8,19 @@ import {
 } from "./repository";
 
 export async function getWorkoutRepository() {
-	const supabase = await createClientServer();
+	const supabase = IS_SERVER ? await createClientServer() : createClientBrowser();
 
 	return createWorkoutRepository(supabase);
 }
 
 export async function getWorkoutExerciseRepository() {
-	const supabase = await createClientServer();
+	const supabase = IS_SERVER ? await createClientServer() : createClientBrowser();
 
 	return createWorkoutExerciseRepository(supabase);
 }
 
 export async function getWorkoutExerciseSetRepository() {
-	const supabase = await createClientServer();
+	const supabase = IS_SERVER ? await createClientServer() : createClientBrowser();
 
 	return createWorkoutExerciseSetRepository(supabase);
 }
