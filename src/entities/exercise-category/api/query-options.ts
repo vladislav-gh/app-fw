@@ -1,7 +1,13 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { getExerciseCategoriesUser } from "./actions";
+import { getExerciseCategoriesSystem, getExerciseCategoriesUser } from "./actions";
 import { QUERY_KEYS_EXERCISE_CATEGORY } from "./query-keys";
+
+export const getQueryOptionsExerciseCategoriesSystem = () =>
+	queryOptions({
+		queryKey: QUERY_KEYS_EXERCISE_CATEGORY.system,
+		queryFn: getExerciseCategoriesSystem,
+	});
 
 export const getQueryOptionsExerciseCategoriesUser = (userId: string) =>
 	queryOptions({
