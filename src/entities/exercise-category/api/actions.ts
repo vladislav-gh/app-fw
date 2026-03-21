@@ -10,7 +10,7 @@ import { PAGES } from "@Shared/config";
 import { getExerciseCategoryRepository } from "./factory";
 
 export async function getExerciseCategoriesSystem() {
-	const repo = await getExerciseCategoryRepository();
+	const repo = await getExerciseCategoryRepository({ public: true });
 
 	return repo.getSystem();
 }
