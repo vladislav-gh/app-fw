@@ -10,6 +10,7 @@ import { CheckIcon, EditIcon, TrashIcon } from "lucide-react";
 
 import { Button, Card, CardTitle, Input } from "@Shared/ui";
 import { cn } from "@Shared/utils";
+import { QUERY_KEYS_EXERCISE } from "@Entities/exercise";
 import { useUser } from "@Entities/user";
 
 import { deleteExerciseCategory, QUERY_KEYS_EXERCISE_CATEGORY, updateExerciseCategory } from "../api";
@@ -47,6 +48,7 @@ export function CardExerciseCategory({ className, category, ...restProps }: Card
 			await updateExerciseCategory({ categoryId: category.id, name: refInputName.current.value });
 
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS_EXERCISE_CATEGORY.user(user.id) });
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS_EXERCISE.user(user.id) });
 		}
 
 		setIsEditing(false);
@@ -60,6 +62,7 @@ export function CardExerciseCategory({ className, category, ...restProps }: Card
 		await deleteExerciseCategory({ categoryId: category.id });
 
 		queryClient.invalidateQueries({ queryKey: QUERY_KEYS_EXERCISE_CATEGORY.user(user.id) });
+		queryClient.invalidateQueries({ queryKey: QUERY_KEYS_EXERCISE.user(user.id) });
 	}
 
 	useEffect(() => {
