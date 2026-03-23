@@ -29,7 +29,7 @@ export async function getWorkout({ workoutId }: WorkoutGetDTO) {
 	return repo.getById({ id: workoutId });
 }
 
-export async function createWorkout({ date, duration, userWeight, notes }: WorkoutCreateDTO) {
+export async function createWorkout({ date, duration, userWeight, notes }: WorkoutCreateDTO = {}) {
 	const user = await getSupabaseUser();
 	const repo = await getWorkoutRepository();
 
