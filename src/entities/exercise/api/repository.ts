@@ -78,7 +78,7 @@ export function createExerciseRepository(supabase: SupabaseClient) {
 				if (error) throw error;
 			}
 
-			if (categoryIds?.length) {
+			if (Array.isArray(categoryIds)) {
 				const { error: errorDeleteCategories } = await supabase
 					.from("exercise_category_map")
 					.delete()
@@ -86,11 +86,13 @@ export function createExerciseRepository(supabase: SupabaseClient) {
 
 				if (errorDeleteCategories) throw errorDeleteCategories;
 
-				const { error: errorInsertCategories } = await supabase
-					.from("exercise_category_map")
-					.insert(categoryIds.map(categoryId => ({ exercise_id: id, category_id: categoryId })));
+				if (categoryIds.length) {
+					const { error: errorInsertCategories } = await supabase
+						.from("exercise_category_map")
+						.insert(categoryIds.map(categoryId => ({ exercise_id: id, category_id: categoryId })));
 
-				if (errorInsertCategories) throw errorInsertCategories;
+					if (errorInsertCategories) throw errorInsertCategories;
+				}
 			}
 
 			return await this.getById({ id });
