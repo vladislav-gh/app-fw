@@ -5,6 +5,7 @@ import type { Exercise, ExerciseUpdateDTO } from "../model";
 
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { CheckIcon, EditIcon, TrashIcon } from "lucide-react";
 
 import {
@@ -21,8 +22,9 @@ import {
 } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 import { useExerciseCategoriesAll } from "@Entities/exercise-category";
+import { useUser } from "@Entities/user";
 
-import { deleteExercise, updateExercise } from "../api";
+import { deleteExercise, QUERY_KEYS_EXERCISE, updateExercise } from "../api";
 
 export interface CardExerciseProps extends ElProps<"div"> {
 	exercise: Exercise;
@@ -37,20 +39,26 @@ export function CardExercise({ className, exercise, ...restProps }: CardExercise
 
 	const tExercise = useTranslations("exercises");
 	const tExerciseCategories = useTranslations("exerciseCategories");
+	const queryClient = useQueryClient();
+	const user = useUser();
 	const exerciseCategoriesAll = useExerciseCategoriesAll();
 
 	const exerciseName = String(
 		exercise.slug ? tExercise(exercise.slug as Parameters<typeof tExercise>[0]) : exercise.name,
 	);
 
-	const isEditable = !exercise.isSystem;
-	const isRemovable = !exercise.isSystem;
+	const isEditable = user && !exercise.isSystem;
+	const isRemovable = user && !exercise.isSystem;
 
 	function handleClickEdit() {
 		setIsEditing(true);
 	}
 
 	async function handleClickSave() {
+		if (!user) {
+			return;
+		}
+
 		const data: Omit<ExerciseUpdateDTO, "exerciseId"> = {};
 
 		if (refInputName.current?.value && refInputName.current.value !== exercise.name) {
@@ -87,13 +95,21 @@ export function CardExercise({ className, exercise, ...restProps }: CardExercise
 
 		if (Object.keys(data).length) {
 			await updateExercise({ exerciseId: exercise.id, ...data });
+
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS_EXERCISE.user(user.id) });
 		}
 
 		setIsEditing(false);
 	}
 
 	async function handleClickRemove() {
+		if (!user) {
+			return;
+		}
+
 		await deleteExercise({ exerciseId: exercise.id });
+
+		queryClient.invalidateQueries({ queryKey: QUERY_KEYS_EXERCISE.user(user.id) });
 	}
 
 	useEffect(() => {
@@ -104,7 +120,7 @@ export function CardExercise({ className, exercise, ...restProps }: CardExercise
 
 	return (
 		<Card className={cn("p-4 gap-2", className)} {...restProps}>
-			<CardTitle className="grow font-bold">
+			<CardTitle className="font-bold">
 				{isEditing ? (
 					<Input ref={refInputName} placeholder="Enter exercise name" defaultValue={exerciseName} />
 				) : (
@@ -161,7 +177,7 @@ export function CardExercise({ className, exercise, ...restProps }: CardExercise
 			)}
 
 			{(isEditable || isRemovable) && (
-				<CardFooter className="flex items-center gap-2 px-0">
+				<CardFooter className="flex items-center gap-2 px-0 mt-auto">
 					{isEditable && !isEditing && (
 						<Button variant="outline" size="icon" aria-label="Edit" onClick={handleClickEdit}>
 							<EditIcon />
