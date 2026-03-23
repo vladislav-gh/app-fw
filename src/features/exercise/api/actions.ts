@@ -11,5 +11,7 @@ export async function addExerciseAction(_prevState: unknown, formData: FormData)
 		return { success: false, error: "Missing name" };
 	}
 
-	return createExercise({ name, description, categoryIds: categoryIds.length ? categoryIds : undefined });
+	const result = await createExercise({ name, description, categoryIds: categoryIds.length ? categoryIds : undefined });
+
+	return { success: true, data: result };
 }
