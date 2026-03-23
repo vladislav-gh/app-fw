@@ -20,9 +20,10 @@ import {
 interface Item {
 	label: string;
 	value: string;
+	isSelected?: boolean;
 }
 
-export interface ComboboxMultipleProps extends Omit<ComponentProps<typeof Combobox>, "items"> {
+export interface ComboboxMultipleProps extends Omit<ComponentProps<typeof Combobox>, "items" | "defaultValue"> {
 	className?: string;
 	items: Item[];
 	emptyMessage?: ReactNode;
@@ -38,14 +39,16 @@ export function ComboboxMultiple({
 }: ComboboxMultipleProps) {
 	const anchor = useComboboxAnchor();
 
+	const selectedItems = items.filter(item => item.isSelected);
+
 	return (
-		<Combobox multiple items={items} {...restProps}>
+		<Combobox multiple items={items} defaultValue={selectedItems} {...restProps}>
 			<ComboboxChips ref={anchor} className={className}>
 				<ComboboxValue>
 					{(values: Item[]) => (
 						<Fragment>
-							{values.map(value => (
-								<ComboboxChip key={value.value}>{value.label}</ComboboxChip>
+							{values.map(item => (
+								<ComboboxChip key={item.value}>{item.label}</ComboboxChip>
 							))}
 
 							<ComboboxChipsInput placeholder={placeholder} />
