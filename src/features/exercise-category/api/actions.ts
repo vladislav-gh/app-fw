@@ -9,5 +9,7 @@ export async function addExerciseCategoryAction(_prevState: unknown, formData: F
 		return { success: false, error: "Missing name" };
 	}
 
-	return createExerciseCategory({ name });
+	const result = await createExerciseCategory({ name });
+
+	return { success: true, data: result };
 }
