@@ -29,7 +29,7 @@ export function FormExerciseAdd({ className, ...restProps }: FormExerciseAddProp
 
 			{!!exerciseCategoriesAll.length && (
 				<NativeSelect className="h-28" wrapperClassName="w-full" name="categoryIds" multiple>
-					<NativeSelectOption>Select categories</NativeSelectOption>
+					<NativeSelectOption value="">Select categories</NativeSelectOption>
 
 					{exerciseCategoriesAll.map(category => (
 						<NativeSelectOption key={category.id} value={category.id}>
