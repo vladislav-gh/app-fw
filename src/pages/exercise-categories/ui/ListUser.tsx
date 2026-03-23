@@ -19,13 +19,7 @@ export function ListUser() {
 	return (
 		<div className="flex flex-col gap-3">
 			{exerciseCategoriesUser?.map(category => (
-				<CardExerciseCategory
-					key={category.id}
-					categoryId={category.id}
-					categoryName={String(category.name)}
-					isEditable
-					isRemovable
-				/>
+				<CardExerciseCategory key={category.id} category={category} />
 			))}
 		</div>
 	);
