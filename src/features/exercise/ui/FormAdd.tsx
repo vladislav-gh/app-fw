@@ -5,7 +5,7 @@ import type { ElProps } from "@Shared/types";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect } from "react";
 
-import { Button, ComboboxMultiple, Input, Textarea } from "@Shared/ui";
+import { Button, Input, NativeSelect, NativeSelectOption, Textarea } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 import { useExerciseCategoriesAll } from "@Entities/exercise-category";
 
@@ -28,18 +28,19 @@ export function FormExerciseAdd({ className, ...restProps }: FormExerciseAddProp
 			<Textarea name="description" placeholder="Enter category description" />
 
 			{!!exerciseCategoriesAll.length && (
-				<ComboboxMultiple
-					name="categoryIds"
-					placeholder="Select categories"
-					items={exerciseCategoriesAll.map(category => ({
-						label: String(
-							category.slug
-								? tExerciseCategories(category.slug as Parameters<typeof tExerciseCategories>[0])
-								: category.name,
-						),
-						value: category.id,
-					}))}
-				/>
+				<NativeSelect className="h-28" wrapperClassName="w-full" name="categoryIds" multiple>
+					<NativeSelectOption>Select categories</NativeSelectOption>
+
+					{exerciseCategoriesAll.map(category => (
+						<NativeSelectOption key={category.id} value={category.id}>
+							{String(
+								category.slug
+									? tExerciseCategories(category.slug as Parameters<typeof tExerciseCategories>[0])
+									: category.name,
+							)}
+						</NativeSelectOption>
+					))}
+				</NativeSelect>
 			)}
 
 			<Button type="submit">Add exercise</Button>
