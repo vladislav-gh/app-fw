@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Badge } from "@Shared/ui";
 import { useWorkout } from "@Entities/workout";
-import { FormWorkoutExerciseAdd } from "@Features/workout";
+import { FormWorkoutExerciseAdd, FormWorkoutExerciseSetAdd } from "@Features/workout";
 
 export function Workout() {
 	const { workout, isLoading } = useWorkout();
@@ -62,6 +62,8 @@ export function Workout() {
 							))}
 						</div>
 					)}
+
+					<FormWorkoutExerciseSetAdd exerciseId={exercise.id} />
 				</div>
 			))}
 
