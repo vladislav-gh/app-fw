@@ -56,12 +56,13 @@ export async function deleteWorkout({ workoutId }: WorkoutDeleteDTO) {
 	return repo.delete({ id: workoutId });
 }
 
-export async function createWorkoutExercise({ workoutId, name, categories }: WorkoutExerciseCreateDTO) {
+export async function createWorkoutExercise({ workoutId, exerciseId, name, categories }: WorkoutExerciseCreateDTO) {
 	const repo = await getWorkoutExerciseRepository();
 
 	return repo.insert({
 		payload: {
 			workout_id: workoutId,
+			exercise_id: exerciseId,
 			name,
 			categories: categories ? JSON.parse(JSON.stringify(categories)) : undefined,
 		},

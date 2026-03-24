@@ -63,8 +63,9 @@ export interface WorkoutDeleteDTO {
 
 export interface WorkoutExerciseCreateDTO {
 	workoutId: string;
+	exerciseId?: string;
 	name: string;
-	categories: WorkoutExerciseCategory[];
+	categories?: WorkoutExerciseCategory[];
 }
 
 export interface WorkoutExerciseUpdateDTO extends Partial<Omit<WorkoutExerciseCreateDTO, "workoutId">> {
