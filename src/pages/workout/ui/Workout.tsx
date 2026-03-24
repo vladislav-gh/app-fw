@@ -1,14 +1,11 @@
 "use client";
 
-import { notFound, useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
-import { getQueryOptionsWorkout } from "@Entities/workout";
+import { useWorkout } from "@Entities/workout";
 
 export function Workout() {
-	const params = useParams<{ id: string }>();
-
-	const { data: workout, isLoading } = useQuery(getQueryOptionsWorkout(params?.id ?? ""));
+	const { workout, isLoading } = useWorkout();
 
 	if (isLoading) {
 		return <div>Loading...</div>;
