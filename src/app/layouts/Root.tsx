@@ -5,6 +5,7 @@ import { Nunito } from "next/font/google";
 
 import { cn } from "@Shared/utils";
 import { Header } from "@Widgets/header";
+import { Nav } from "@Widgets/nav";
 import { Providers } from "@App/providers";
 
 import "@App/styles";
@@ -39,6 +40,7 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 			>
 				<Providers locale={locale as Locale}>
 					<Header />
+					<Nav />
 					{children}
 				</Providers>
 			</body>
