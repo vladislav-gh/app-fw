@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "react";
 
 import { Nunito } from "next/font/google";
 
+import { Toaster } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 import { Header } from "@Widgets/header";
 import { Nav } from "@Widgets/nav";
@@ -42,6 +43,7 @@ export async function LayoutRoot({ params, children }: LayoutRootProps) {
 					<Header />
 					<Nav />
 					{children}
+					<Toaster />
 				</Providers>
 			</body>
 		</html>
