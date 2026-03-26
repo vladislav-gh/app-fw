@@ -1,5 +1,4 @@
-import { useMemo } from "react";
-import { useWindowSize } from "react-use";
+import { useEffect, useState } from "react";
 
 import { BREAKPOINTS, IS_CLIENT } from "@Shared/config";
 
@@ -24,9 +23,25 @@ const getCurrentScreensState = (): CurrentScreensStateModel => ({
 });
 
 export function useScreens() {
-	const { width } = useWindowSize();
+	const [screens, setScreens] = useState(getCurrentScreensState);
 
-	const screens = useMemo(() => getCurrentScreensState(), [width]);
+	useEffect(() => {
+		function handleResize() {
+			setScreens(prev => {
+				const next = getCurrentScreensState();
+
+				if ((Object.keys(prev) as (keyof CurrentScreensStateModel)[]).every(key => prev[key] === next[key])) {
+					return prev;
+				}
+
+				return next;
+			});
+		}
+
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	return screens;
 }
