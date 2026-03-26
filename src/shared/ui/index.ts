@@ -8,7 +8,7 @@ export * from "./shadcn/components/ui/card";
 export * from "./shadcn/components/ui/combobox";
 export * from "./shadcn/components/ui/input";
 export * from "./shadcn/components/ui/native-select";
-export * from "./shadcn/components/ui/sonner";
 export * from "./shadcn/components/ui/textarea";
 export * from "./spinner";
+export * from "./toaster";
 export * from "./typography";
