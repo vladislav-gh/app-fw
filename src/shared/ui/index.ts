@@ -6,6 +6,7 @@ export * from "./shadcn/components/ui/badge";
 export * from "./shadcn/components/ui/button";
 export * from "./shadcn/components/ui/card";
 export * from "./shadcn/components/ui/combobox";
+export * from "./shadcn/components/ui/dialog";
 export * from "./shadcn/components/ui/input";
 export * from "./shadcn/components/ui/native-select";
 export * from "./shadcn/components/ui/textarea";
