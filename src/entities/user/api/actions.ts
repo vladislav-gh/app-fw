@@ -7,7 +7,12 @@ import { getSupabaseUser } from "@Shared/api/supabase";
 import { getUserRepository } from "./factory";
 
 export async function getUser() {
-	const user = await getSupabaseUser();
+	const user = await getSupabaseUser().catch(() => null);
+
+	if (!user) {
+		return null;
+	}
+
 	const repo = await getUserRepository();
 
 	return repo.getById({ id: user.id });
