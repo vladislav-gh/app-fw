@@ -2,11 +2,11 @@
 
 import type { ElProps } from "@Shared/types";
 
-import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useEffectEvent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { PAGES } from "@Shared/config";
+import { useRouter } from "@Shared/i18n";
 import { Button } from "@Shared/ui";
 import { cn } from "@Shared/utils";
 import { useUser } from "@Entities/user";
@@ -17,8 +17,8 @@ import { addWorkoutAction } from "../api";
 export type FormWorkoutAddProps = ElProps<"form">;
 
 export function FormWorkoutAdd({ className, ...restProps }: FormWorkoutAddProps) {
-	const [state, dispatchAction] = useActionState(addWorkoutAction, null);
 	const router = useRouter();
+	const [state, dispatchAction] = useActionState(addWorkoutAction, null);
 	const queryClient = useQueryClient();
 	const user = useUser();
 
