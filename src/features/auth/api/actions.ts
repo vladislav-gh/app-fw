@@ -1,37 +1,55 @@
 "use server";
 
+import { getZodFieldErrors } from "@Shared/utils";
+
+import { ForgotPasswordSchema, SignInSchema, SignUpSchema } from "../model";
 import { forgotPassword, signIn, signOut, signUp } from "./service";
 
 export async function signUpAction(_prevState: unknown, formData: FormData) {
-	const email = formData.get("email")?.toString().trim();
-	const password = formData.get("password")?.toString().trim();
+	const schemaResult = SignUpSchema.safeParse({
+		email: formData.get("email"),
+		password: formData.get("password"),
+	});
 
-	if (!email || !password) {
-		return { success: false, error: "Missing email or password" };
+	if (!schemaResult.success) {
+		return {
+			success: false,
+			fields: getZodFieldErrors(schemaResult.error),
+		};
 	}
 
-	return signUp({ email, password });
+	return signUp(schemaResult.data);
 }
 
 export async function signInAction(_prevState: unknown, formData: FormData) {
-	const email = formData.get("email")?.toString().trim();
-	const password = formData.get("password")?.toString().trim();
+	const schemaResult = SignInSchema.safeParse({
+		email: formData.get("email"),
+		password: formData.get("password"),
+	});
 
-	if (!email || !password) {
-		return { success: false, error: "Missing email or password" };
+	if (!schemaResult.success) {
+		return {
+			success: false,
+			fields: getZodFieldErrors(schemaResult.error),
+		};
 	}
 
-	return signIn({ email, password });
+	return signIn(schemaResult.data);
 }
 
 export async function forgotPasswordAction(_prevState: unknown, formData: FormData) {
-	const email = formData.get("email")?.toString().trim();
+	const schemaResult = ForgotPasswordSchema.safeParse({
+		email: formData.get("email"),
+	});
 
-	if (!email) {
-		return { success: false, error: "Missing email" };
+	if (!schemaResult.success) {
+		return {
+			success: false,
+			fields: getZodFieldErrors(schemaResult.error),
+		};
 	}
 
-	return forgotPassword({ email });
+	return forgotPassword(schemaResult.data);
 }
 
 export async function signOutAction() {

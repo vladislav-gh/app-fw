@@ -1,10 +1,8 @@
-export interface SignUpDTO {
-	email: string;
-	password: string;
-}
+import type * as z from "zod";
+import type { ForgotPasswordSchema, SignInSchema, SignUpSchema } from "./schemas";
 
-export type SignInDTO = SignUpDTO;
+export type SignUpDTO = z.infer<typeof SignUpSchema>;
 
-export interface ForgotPasswordDTO {
-	email: string;
-}
+export type SignInDTO = z.infer<typeof SignInSchema>;
+
+export type ForgotPasswordDTO = z.infer<typeof ForgotPasswordSchema>;
