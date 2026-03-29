@@ -1,17 +1,25 @@
 "use server";
 
+import { getZodFieldErrors } from "@Shared/utils";
 import { createExercise } from "@Entities/exercise";
 
-export async function addExerciseAction(_prevState: unknown, formData: FormData) {
-	const name = formData.get("name")?.toString().trim();
-	const description = formData.get("description")?.toString().trim();
-	const categoryIds = formData.getAll("categoryIds").filter(Boolean) as string[];
+import { AddExerciseSchema } from "../model";
 
-	if (!name) {
-		return { success: false, error: "Missing name" };
+export async function addExerciseAction(_prevState: unknown, formData: FormData) {
+	const schemaResult = AddExerciseSchema.safeParse({
+		name: formData.get("name"),
+		description: formData.get("description"),
+		categoryIds: formData.getAll("categoryIds") as string[],
+	});
+
+	if (!schemaResult.success) {
+		return {
+			success: false,
+			fields: getZodFieldErrors(schemaResult.error),
+		};
 	}
 
-	const result = await createExercise({ name, description, categoryIds: categoryIds.length ? categoryIds : undefined });
+	const result = await createExercise(schemaResult.data);
 
 	return { success: true, data: result };
 }
