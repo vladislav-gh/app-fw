@@ -9,7 +9,7 @@ import { PAGES } from "@Shared/config";
 import { SUPABASE_KEY, SUPABASE_URL } from "./config";
 
 const publicRoutes = [PAGES.signUp, PAGES.signIn, PAGES.forgotPassword];
-const privateRoutes = [PAGES.profile];
+const privateRoutes: "*" | string[] = "*";
 
 export async function updateSession(request: NextRequest, response: NextResponse) {
 	const supabase = createServerClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
@@ -27,7 +27,12 @@ export async function updateSession(request: NextRequest, response: NextResponse
 	const { data } = await supabase.auth.getClaims();
 	const user = data?.claims;
 
-	if (!user && privateRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
+	if (
+		!user &&
+		((privateRoutes === "*" && !publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))) ||
+			(Array.isArray(privateRoutes) && privateRoutes.some(route => request.nextUrl.pathname.startsWith(route))))
+	) {
+		console.log("tut");
 		const url = request.nextUrl.clone();
 
 		url.pathname = PAGES.signIn;
